@@ -99,6 +99,7 @@ GLOBAL_LIST_EMPTY(reformation_portals)
 	if(!in_range(src, user))
 		return
 	user.vore_death = FALSE
-	user.bring_body()
+	var/portal_loc = get_turf(src)
+	user.bring_body(portal_loc)
 	user.rise_body()
 //OV edit end
