@@ -17,8 +17,8 @@ GLOBAL_LIST_EMPTY(reformation_portals)
 
 /obj/structure/respawn_portal/Initialize()
 	. = ..()
-	soundloop = new(list(src), FALSE)
-	soundloop.start()
+//	soundloop = new(list(src), FALSE) //OV REMOVE
+//	soundloop.start() //OV REMOVE
 
 /obj/structure/respawn_portal/attack_ghost(mob/dead/observer/user)
 	if(QDELETED(user))
