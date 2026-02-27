@@ -41,6 +41,7 @@ GLOBAL_LIST_INIT(learnable_spells, (list(/obj/effect/proc_holder/spell/invoked/p
 		/obj/effect/proc_holder/spell/invoked/giants_strength,
 		/obj/effect/proc_holder/spell/invoked/create_campfire,
 		/obj/effect/proc_holder/spell/invoked/mending,
+		/obj/effect/proc_holder/spell/invoked/mending/lesser, //Caustic Edit: For those who need to be cheap...
 		/obj/effect/proc_holder/spell/self/light,
 		/obj/effect/proc_holder/spell/invoked/conjure_weapon,
 		/obj/effect/proc_holder/spell/self/conjure_armor,
@@ -56,12 +57,14 @@ GLOBAL_LIST_INIT(learnable_spells, (list(/obj/effect/proc_holder/spell/invoked/p
 		/obj/effect/proc_holder/spell/invoked/forcewall/greater,
 		/obj/effect/proc_holder/spell/invoked/wither,
 		/obj/effect/proc_holder/spell/invoked/rebuke,
+		/obj/effect/proc_holder/spell/targeted/touch/sizespell, //Caustic edit
 		/obj/effect/proc_holder/spell/invoked/projectile/fireball/artillery,
 		/obj/effect/proc_holder/spell/invoked/conjure_primordial,
 		/obj/effect/proc_holder/spell/invoked/raise_deadite,
 		/obj/effect/proc_holder/spell/invoked/bonechill,
 		/obj/effect/proc_holder/spell/invoked/silence,
 		/obj/effect/proc_holder/spell/self/findfamiliar,
+		/obj/effect/proc_holder/spell/invoked/conjure_tool/mage, // Caustic Edit
 		/obj/effect/proc_holder/spell/invoked/projectile/stygian
 		)
 ))

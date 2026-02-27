@@ -170,6 +170,7 @@ GLOBAL_LIST_INIT(wanderer_positions, list( //Homeless
 	"Adventurer",
 	"Court Agent",
 	"Trader",
+	"Wild Soul", //caustic edit
 ))
 
 GLOBAL_LIST_INIT(antagonist_positions, list( //Mostly lesser antagonists

@@ -660,7 +660,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_BACK)
 			if(H.backr && H.backl)
 				return FALSE
-			if( !(I.slot_flags & ITEM_SLOT_BACK) )
+			if(!(I.slot_flags & ITEM_SLOT_BACK))
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_BACK_R)
@@ -990,7 +990,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				H.Jitter(5)
 			hunger_rate = 10 * HUNGER_FACTOR*/
 //		hunger_rate *= H.physiology.hunger_mod
-		H.adjust_nutrition(-hunger_rate)
+		if(!H.mind || world.time < H.time_of_last_move + 10 MINUTES)
+			H.adjust_nutrition(-hunger_rate)
 
 		var/obj/item/organ/breasts/breasts = H.has_breasts()
 		if(breasts)
@@ -1008,7 +1009,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		// THEY HUNGER
 		var/hunger_rate = HUNGER_FACTOR
 //		hunger_rate *= H.physiology.hunger_mod
-		H.adjust_hydration(-hunger_rate)
+		if(!H.mind || world.time < H.time_of_last_move + 10 MINUTES)
+			H.adjust_hydration(-hunger_rate)
 
 
 	if (H.nutrition > NUTRITION_LEVEL_FULL)
@@ -1084,8 +1086,11 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			H.apply_status_effect(/datum/status_effect/debuff/hungryt3)
 			H.remove_status_effect(/datum/status_effect/debuff/hungryt1)
 			H.remove_status_effect(/datum/status_effect/debuff/hungryt2)
-			if(prob(3))
-				playsound(get_turf(H), pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
+			//Cove edit start
+			if(!istype(H.loc, /obj/belly))
+				if(prob(3))
+					playsound(get_turf(H), pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
+			//Cove edit end
 
 	switch(H.hydration)
 //		if(HYDRATION_LEVEL_WATERLOGGED to INFINITY)

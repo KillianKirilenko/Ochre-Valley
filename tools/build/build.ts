@@ -112,6 +112,7 @@ export const DmTarget = new Juke.Target({
     "sound/**",
     "tgui/public/tgui.html",
     "modular/**",
+    "modular_causticcove/**",
     `${DME_NAME}.dme`,
     NamedVersionFile,
   ],

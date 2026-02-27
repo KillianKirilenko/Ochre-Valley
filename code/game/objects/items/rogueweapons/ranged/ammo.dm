@@ -696,6 +696,7 @@
 	max_integrity = 0.1
 
 
+
 //mob projectiles
 /obj/projectile/bullet/reusable/arrow/orc
 	armor_penetration = 25

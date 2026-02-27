@@ -249,6 +249,10 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	/// Angle of the icon while wielded, these are used for attack animations. Generally it's flat, but not always.
 	var/icon_angle_wielded = 0
 
+	///Caustic edit begin
+	//RATWOOD COLLAR/LEASH IMPORT
+	var/leashable = FALSE
+	///Caustic edit end
 	var/no_use_cd = FALSE //if true, no cooldown when interacting with it
 
 	/// Makes this item impossible to enchant, for temporary item

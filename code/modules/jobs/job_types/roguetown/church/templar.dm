@@ -10,7 +10,7 @@
 	allowed_races = ACCEPTED_RACES
 	allowed_patrons = ALL_DIVINE_PATRONS
 	outfit = /datum/outfit/job/roguetown/templar
-	min_pq = 3 //Deus vult, but only according to the proper escalation rules
+	min_pq = null //3 //Deus vult, but only according to the proper escalation rules
 	max_pq = null
 	round_contrib_points = 2
 	total_positions = 4
@@ -301,8 +301,15 @@
 			cloak = /obj/item/clothing/cloak/templar/pestran
 		if(/datum/patron/divine/eora) //Eora content from stonekeep
 			wrists = /obj/item/clothing/neck/roguetown/psicross/eora
-			head = /obj/item/clothing/head/roguetown/helmet/heavy/eoran
-			cloak = /obj/item/clothing/cloak/templar/eoran
+			cloak = /obj/item/clothing/cloak/templar/eoran //caustic edit start
+			if(H.mind)
+				var/helmets = list("Sallet", "Heavy")
+				var/helmetchoice = input(H,"Choose your helmet", "TAKE UP YOUR HELM") as anything in helmets
+				switch(helmetchoice)
+					if("Heavy")
+						head = /obj/item/clothing/head/roguetown/helmet/heavy/eoran
+					if("Sallet") //
+						head = /obj/item/clothing/head/roguetown/helmet/sallet/eoran //caustic edit end
 		if(/datum/patron/divine/noc)
 			wrists = /obj/item/clothing/neck/roguetown/psicross/noc
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/nochelm

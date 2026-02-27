@@ -7,6 +7,15 @@
 	if(H.advsetup) return
 	if(HAS_TRAIT(H, TRAIT_SILVER_BLESSED)) return
 
+	// Caustic Edit - If we were resisting transformation, Restore strength if we're under the night sky
+	if(transformed && resisting_transformation && !ignore_transformation_resist)
+		if(GLOB.tod == "night")
+			if(isturf(H.loc))
+				var/turf/loc = H.loc
+				if(loc.can_see_sky())
+					remove_transform_resistance(H)
+	// Caustic Edit End
+
 	// Werewolf transforms at night AND under the sky
 	if(!transformed && !transforming)
 		if(GLOB.tod == "night")
@@ -59,18 +68,35 @@
 	else if(transformed)
 		if(GLOB.tod != "night")
 			if(!untransforming)
-				untransforming = world.time // Start untransformation phase
+				// Caustic Edit - Transformation resistance
+				if(resisting_transformation && !ignore_transformation_resist)
+					if(isturf(H.loc))
+						var/turf/loc = H.loc
+						if(loc.can_see_sky())
+							if(H.show_redflash())
+								H.flash_fullscreen("redflash3")
+							to_chat(H, span_danger("Astrata has seen me! I can no longer RESIST her!"))
+							untransforming = world.time // Start untransformation phase
+							ignore_transformation_resist = TRUE // Too late, no going back now!
+				else
+					untransforming = world.time // Start untransformation phase
+				// Caustic Edit End
 
-			if (world.time >= untransforming + 30 SECONDS) // Untransform
+			var/forcing_untransform = !resisting_transformation || ignore_transformation_resist // Caustic Edit: Transformation resistance check
+			if (world.time >= untransforming + 30 SECONDS && forcing_untransform) // Untransform // Caustic Edit: Transformation resistance check
 				H.emote("rage", forced = TRUE)
 				H.werewolf_untransform()
 				transformed = FALSE
 				untransforming = FALSE // Reset untransforming phase
 
-			else if (world.time >= untransforming) // Alert player
+			else if (world.time >= untransforming && forcing_untransform) // Alert player // Caustic Edit: Transformation resistance check
 				if(H.show_redflash())
 					H.flash_fullscreen("redflash1")
 				to_chat(H, span_warning("Daylight shines around me... the curse begins to fade."))
+				// Caustic Edit - Transformation resistance
+				if(!ignore_transformation_resist)
+					to_chat(H, span_warning("<a href='?src=[REF(src)];task=apply_transform_resistance;'>(To resist changing back to continue a scene, head somewhere you cannot see the sun and click here!)</a>"))
+				// Caustic Edit End
 
 
 /mob/living/carbon/human/species/werewolf/death(gibbed, nocutscene = FALSE)
@@ -128,6 +154,15 @@
 	W.stored_experience = ensure_skills().skill_experience.Copy()
 	W.cmode_music_override = cmode_music_override
 	W.cmode_music_override_name = cmode_music_override_name
+	// CC Edit Start
+	// Transfer voregans and contents of them to the destination form
+	W.vore_organs = vore_organs.Copy()
+	W.vore_selected = vore_selected
+	for(var/obj/belly/B as anything in vore_organs)
+		B.forceMove(W)
+		B.owner = W
+	vore_organs.Cut()
+	// CC Edit End
 	mind.transfer_to(W)
 	skills?.known_skills = list()
 	skills?.skill_experience = list()
@@ -194,7 +229,15 @@
 	W.copy_known_languages_from(WA.stored_language)
 	skills?.known_skills = WA.stored_skills.Copy()
 	skills?.skill_experience = WA.stored_experience.Copy()
-
+	// CC Edit Start
+	// Transfer voregans and contents of them to the destination form
+	W.vore_organs = vore_organs.Copy()
+	W.vore_selected = vore_selected
+	for(var/obj/belly/B as anything in vore_organs)
+		B.forceMove(W)
+		B.owner = W
+	vore_organs.Cut()
+	// CC Edit End
 	W.RemoveSpell(new /obj/effect/proc_holder/spell/self/howl)
 	W.RemoveSpell(new /obj/effect/proc_holder/spell/self/claws)
 	W.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/woundlick)

@@ -153,7 +153,7 @@
 	list_reagents = list(/datum/reagent/floure = 1)
 	grind_results = list(/datum/reagent/floure = 10)
 	volume = 1
-	sellprice = 0
+	sellprice = 3
 
 /obj/item/reagent_containers/powder/rocknut
 	name = "rocknut powder"
@@ -161,7 +161,7 @@
 	gender = PLURAL
 	icon_state = "rocknut"
 	volume = 1
-	sellprice = 0
+	sellprice = 3
 
 /obj/item/reagent_containers/powder/rocknut/Initialize()
 	. = ..()

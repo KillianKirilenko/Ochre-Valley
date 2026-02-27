@@ -40,6 +40,13 @@
 	speed = 1
 	nodamage = FALSE
 
+// Caustic Edit
+/obj/projectile/magic/frostbolt/arc
+	name = "Arced Frostbolt"
+	damage = 15 // 25% damage penalty
+	arcshot = TRUE
+// Caustic Edit End
+
 /obj/projectile/magic/frostbolt/on_hit(target)
 	. = ..()
 	if(ismob(target))

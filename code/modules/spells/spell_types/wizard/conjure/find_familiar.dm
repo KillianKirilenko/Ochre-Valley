@@ -332,6 +332,8 @@
 	mind_datum.AddSpell(new /obj/effect/proc_holder/spell/self/message_summoner)
 	user.mind?.AddSpell(new /obj/effect/proc_holder/spell/self/message_familiar)
 
+//Used to add inherent spells, now they choose their own.
+	awakener.choose_spells()
 	// Add familiar's inherent spells
 	if (awakener.inherent_spell)
 		for (var/spell_path in awakener.inherent_spell)

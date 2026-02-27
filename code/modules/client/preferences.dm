@@ -397,6 +397,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "</td>"
 
 			dat += "<td style='width:33%;text-align:right'>"
+			///Caustic edit
+			dat += "<a href='?_src_=prefs;preference=epilepsy;task=menu'>[epilepsy ? "Epileptic mode" : "Normal mode"]</a>"
+			///Caustic edit end
 			dat += "</td>"
 			dat += "</tr>"
 
@@ -525,6 +528,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 				dat += "<b>Second Virtue:</b> <a href='?_src_=prefs;preference=virtuetwo;task=input'>[virtuetwo]</a><BR>"
 			else
 				virtuetwo = GLOB.virtues[/datum/virtue/none]
+			///CC Edit
+			dat += get_extra_virtue_htmlpick() 
+			///CC Edit End
 			dat += "<b>Vices:</b>"
 			if(charflaws.len)
 				for(var/i = 1 to charflaws.len)
@@ -551,6 +557,10 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<b>Faith:</b> <a href='?_src_=prefs;preference=faith;task=input'>[selected_faith?.name || "FUCK!"]</a><BR>"
 			dat += "<b>Patron:</b> <a href='?_src_=prefs;preference=patron;task=input'>[selected_patron?.name || "FUCK!"]</a><BR>"
 			dat += "<b>Dominance:</b> <a href='?_src_=prefs;preference=domhand'>[domhand == 1 ? "Left-handed" : "Right-handed"]</a><BR>"
+			//Caustic edit
+			dat += "<b>Size Category:</b> <a href='?_src_=prefs;preference=sizecat;task=input'>[sizecat]</a><BR>"
+			dat += "<b>Pickup able:</b> <a href='?_src_=prefs;preference=pickupable'>[pickupable == 1 ? "Yes" : "No"]</a><BR>"
+			//Caustic edit end
 			dat += "<b>Food Preferences:</b> <a href='?_src_=prefs;preference=culinary;task=menu'>Change</a><BR>"
 
 			var/musicname = (combat_music.shortname ? combat_music.shortname : combat_music.name)
@@ -634,7 +644,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 			dat += "<br><b>Loadout:</b> <a href='?_src_=prefs;preference=open_loadout;task=input'>Open Menu</a>"
 			dat += "</td>"
-
+			dat += "</td>"
 			dat += "</tr></table>"
 //			-----------END OF BODY TABLE-----------
 			dat += "</td>"
@@ -1467,6 +1477,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 				SetAntag(user)
 	else if(href_list["preference"] == "tgui_ui_prefs")
 		tgui_pref = !tgui_pref
+	///Caustic edit
+	else if(href_list["preference"] == "epilepsy")
+		epilepsy = !epilepsy
+	///Caustic edit end
 
 	else if(href_list["preference"] == "charflaw")
 		var/task = href_list["task"]
@@ -2266,6 +2280,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					vampire_eyes = null
 				if("vampire_skin_clear")
 					vampire_skin = null
+
 				if("species")
 					var/list/species = list()
 					for(var/A in GLOB.roundstart_races)
@@ -2356,7 +2371,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						var/datum/virtue/V = GLOB.virtues[path]
 						if (!V.name)
 							continue
-						if ((V.name == virtue.name || V.name == virtuetwo.name) && !istype(V, /datum/virtue/none))
+						if ((V.name == virtue.name || V.name == virtuetwo.name || V.name == extravirtue.name) && !istype(V, /datum/virtue/none))
 							continue
 						if (istype(V, /datum/virtue/origin))
 							continue
@@ -2382,7 +2397,9 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						var/datum/virtue/V = GLOB.virtues[path]
 						if (!V.name)
 							continue
-						if ((V.name == virtue.name || V.name == virtuetwo.name) && !istype(V, /datum/virtue/none))
+						if ((V.name == virtue.name || V.name == virtuetwo.name || V.name == extravirtue.name) && !istype(V, /datum/virtue/none))
+							continue
+						if (istype(V, /datum/virtue/heretic) && !istype(selected_patron, /datum/patron/inhumen))
 							continue
 						if (istype(V, /datum/virtue/origin))
 							continue
@@ -2404,7 +2421,8 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					/*	if (statpack.type != /datum/statpack/wildcard/virtuous)
 							statpack = new /datum/statpack/wildcard/virtuous
 							to_chat(user, span_purple("Your statpack has been set to virtuous (no stats) due to selecting a virtue.")) */
-
+				if("extravirtue")
+					get_extra_virtue_input(user)
 				if("origin")
 					var/list/virtue_choices = list()
 					for (var/path as anything in GLOB.virtues)
@@ -2428,7 +2446,6 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						var/datum/virtue/virtue_chosen = virtue_choices[result]
 						virtue_origin = virtue_chosen
 						to_chat(user, process_virtue_text(virtue_chosen))
-
 				if("charflaw_averse_choice")
 					var/choice = tgui_input_list(user, "Who do you loathe?", "AVERSION", GLOB.averse_factions)
 					if(choice)
@@ -2445,7 +2462,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					if(new_body_size)
 						new_body_size = clamp(new_body_size * 0.01, BODY_SIZE_MIN, BODY_SIZE_MAX)
 						features["body_size"] = new_body_size
-
+				//Caustic edit
+				if("sizecat")
+					select_sizecat(user)
+				//Caustic edit end
 				if("taur_color")
 					var/new_taur_color = color_pick_sanitized(user, "Choose your character's taur color:", "Character Preference", "#"+taur_color)
 					if(new_taur_color)
@@ -2832,18 +2852,26 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					load_character()
 
 				if("changeslot")
+					// Caustic Edit - Fixes duplicate slot names not showing up + different slot name presentation
 					var/list/choices = list()
+					var/choices_default
 					if(path)
 						var/savefile/S = new /savefile(path)
 						if(S)
 							for(var/i=1, i<=max_save_slots, i++)
 								var/name
 								S.cd = "/character[i]"
-								S["real_name"] >> name
-								if(!name)
-									name = "Slot[i]"
+								var/nickname = S["nickname"]
+								var/realname = S["real_name"]
+								if(!realname)
+									name = "[i] - \[EMPTY SLOT\]"
+								else
+									name = "[i] - [realname][nickname ? " ([nickname])" : ""]"
+								if(loaded_slot == i)
+									choices_default = name
 								choices[name] = i
-					var/choice = tgui_input_list(user, "CHOOSE A HERO","ROGUETOWN", choices)
+					var/choice = tgui_input_list(user, "CHOOSE A HERO","AZURE PEAK", choices, choices_default)
+					// Caustic Edit End
 					if(choice)
 						choice = choices[choice]
 						// Close any open loadout menu before switching slots
@@ -2859,6 +2887,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						current_tab = text2num(href_list["tab"])
 				if("lore_primer")
 					LorePopup(user)
+				//Caustic edit
+				if("pickupable")
+					pickupable = !pickupable
+				//Caustic edit end
 
 	ShowChoices(user)
 	return 1
@@ -3001,7 +3033,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 			for(var/X in L)
 				ADD_TRAIT(character, curse2trait(X), TRAIT_GENERIC)
 
-	if(taur_type)
+	if(taur_type && pref_species.allowed_taur_types.len != 0)
 		character.Taurize(taur_type, "#[taur_color]")
 	else if(character_setup)
 		// This should only ever ~do~ anything for previews

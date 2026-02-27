@@ -63,6 +63,10 @@
 		var/datum/virtue/virtue = new path()
 		GLOB.virtues[path] = virtue
 
+	for (var/path in subtypesof(/datum/sizecat))
+		var/datum/sizecat/sc = new path()
+		GLOB.sizecats[path] = sc
+	
 	// Loadout items
 	for (var/path in subtypesof(/datum/loadout_item))
 		var/datum/loadout_item/loadout_item = new path()
@@ -86,6 +90,10 @@
 
 	for(var/mob/living/carbon/human/species/wildshape/shape as anything in subtypesof(/mob/living/carbon/human/species/wildshape))
 		GLOB.wildshapes[shape.name] = shape
+// CC Edit Start
+	for(var/mob/living/carbon/human/species/animagus/shape as anything in subtypesof(/mob/living/carbon/human/species/animagus))
+		GLOB.animagusshapes[shape.name] = shape
+// CC Edit End
 
 //creates every subtype of prototype (excluding prototype) and adds it to list L.
 //if no list/L is provided, one is created.

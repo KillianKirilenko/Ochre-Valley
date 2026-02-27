@@ -69,7 +69,14 @@
 		/datum/sprite_accessory/horns/large/branching_antlers,
 		/datum/sprite_accessory/horns/large/pronghorn,
 		/datum/sprite_accessory/horns/large/spire,
-		/datum/sprite_accessory/horns/large/highrise
+		/datum/sprite_accessory/horns/large/highrise,
+		//CC Start
+		/datum/sprite_accessory/horns/large/caustic/antlers,
+		/datum/sprite_accessory/horns/large/caustic/antlers/large,
+		/datum/sprite_accessory/horns/large/caustic/antlers/regal,
+		/datum/sprite_accessory/horns/large/caustic/antlers/monarch,
+		/datum/sprite_accessory/horns/large/caustic/antlers/short
+		//CC End
 		)
 
 /datum/customizer/organ/horns/demihuman
@@ -129,7 +136,14 @@
 		/datum/sprite_accessory/horns/large/branching_antlers,
 		/datum/sprite_accessory/horns/large/pronghorn,
 		/datum/sprite_accessory/horns/large/spire,
-		/datum/sprite_accessory/horns/large/highrise
+		/datum/sprite_accessory/horns/large/highrise,
+		//CC Start
+		/datum/sprite_accessory/horns/large/caustic/antlers,
+		/datum/sprite_accessory/horns/large/caustic/antlers/large,
+		/datum/sprite_accessory/horns/large/caustic/antlers/regal,
+		/datum/sprite_accessory/horns/large/caustic/antlers/monarch,
+		/datum/sprite_accessory/horns/large/caustic/antlers/short
+		//CC End
 		)
 
 /datum/customizer/organ/horns/anthro
@@ -189,7 +203,14 @@
 		/datum/sprite_accessory/horns/large/branching_antlers,
 		/datum/sprite_accessory/horns/large/pronghorn,
 		/datum/sprite_accessory/horns/large/spire,
-		/datum/sprite_accessory/horns/large/highrise
+		/datum/sprite_accessory/horns/large/highrise,
+		//CC Start
+		/datum/sprite_accessory/horns/large/caustic/antlers,
+		/datum/sprite_accessory/horns/large/caustic/antlers/large,
+		/datum/sprite_accessory/horns/large/caustic/antlers/regal,
+		/datum/sprite_accessory/horns/large/caustic/antlers/monarch,
+		/datum/sprite_accessory/horns/large/caustic/antlers/short
+		//CC End
 		)
 
 /datum/customizer/organ/horns/tusks

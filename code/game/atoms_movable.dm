@@ -172,7 +172,16 @@
 	setGrabState(state)
 	if(ismob(AM))
 		var/mob/M = AM
-		log_combat(src, M, "grabbed", addition="passive grab")
+		//Caustic Edit - Attempting to tweak the logging of grabs to record the state
+		if(state == GRAB_PASSIVE)
+			log_combat(src, M, "grabbed", addition="passive grab")
+		else if(state == GRAB_AGGRESSIVE)
+			log_combat(src, M, "grabbed", addition="aggressive grab")
+		else if(state == GRAB_NECK)
+			log_combat(src, M, "grabbed", addition="neck grab")
+		else
+			log_combat(src, M, "grabbed", addition="kill grab")
+		//Caustic Edit End
 		if(M.doing)
 			M.doing = FALSE
 		if(!supress_message)

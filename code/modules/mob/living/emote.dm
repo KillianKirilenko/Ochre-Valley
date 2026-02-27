@@ -654,7 +654,10 @@
 		return
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		H.flash_fullscreen("redflash3")
+		//Caustic Edit
+		if(H.show_redflash())
+			H.flash_fullscreen("redflash3")
+		//Caustic Edit End
 		H.AdjustSleeping(-50)
 		playsound(target.loc, 'sound/foley/slap.ogg', 100, TRUE, -1)
 
@@ -672,7 +675,10 @@
 		return
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		H.flash_fullscreen("redflash1")
+		//Caustic Edit
+		if (H.show_redflash())
+			H.flash_fullscreen("redflash1")
+		//Caustic Edit End
 
 /mob/living/carbon/human/verb/emote_pinch()
 	set name = "Pinch"
@@ -1264,6 +1270,22 @@
 	set category = "Noises"
 
 	emote("yawn", intentional = TRUE)
+
+//Caustic Edit - Add *swear emote
+/datum/emote/living/swear
+	key = "swear"
+	key_third_person = "swears"
+	message = "says a swear word!"
+	message_muffled = "quietly mumbles a swear."
+	emote_type = EMOTE_AUDIBLE
+	show_runechat = TRUE
+
+/mob/living/carbon/human/verb/emote_swear()
+	set name = "Swear"
+	set category = "Noises"
+
+	emote("swear", intentional = TRUE)
+//Caustic Edit End
 
 /datum/emote/living/custom
 	key = "me"

@@ -426,6 +426,28 @@
 		held_items[P]["PRICE"] = 100 // relatively expensive, but cheaper than importing a whole mount
 	update_icon()
 
+/obj/structure/roguemachine/vendor/tower
+	keycontrol = "university"
+
+/obj/structure/roguemachine/vendor/tower/Initialize()
+	. = ..()
+	for(var/X in list(
+		/obj/item/reformation_gem,
+		/obj/item/reformation_gem,
+		/obj/item/reformation_gem,
+		/obj/item/reformation_gem,
+		/obj/item/reformation_gem,
+		/obj/item/reformation_gem,
+		/obj/item/reformation_gem,
+		/obj/item/reformation_gem,
+		/obj/item/reformation_gem,
+		/obj/item/reformation_gem,))
+		var/obj/P = new X(src)
+		held_items[P] = list()
+		held_items[P]["NAME"] = P.name
+		held_items[P]["PRICE"] = 15
+	update_icon()
+	
 /obj/structure/roguemachine/vendor/church_bedroomset_one //contains the keys to the church bedrooms, better visually than having them on a table
 	keycontrol = "priest"
 	will_hawk = FALSE

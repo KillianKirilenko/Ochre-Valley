@@ -595,7 +595,7 @@ GLOBAL_LIST(teleport_runes)
 	desc = "A large spiraling sigil that seems to thrum with power."
 	icon = 'icons/effects/160x160.dmi'
 	icon_state = "portal"
-	tier = 2
+	tier = 3 //Caustic Cove Edit - bump the tier to 3 so it's actually usable in regular play
 	req_invokers = 2
 	invocation = "Plana Convergant!"
 	req_keyword = TRUE

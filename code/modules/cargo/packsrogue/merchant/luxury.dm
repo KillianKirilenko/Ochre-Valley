@@ -171,3 +171,9 @@
 	name = "Fine Parasol"
 	cost = 65
 	contains = list(/obj/item/rogueweapon/mace/parasol/noble)
+
+//Caustic edit start
+/datum/supply_pack/rogue/luxury/sizescroll
+	name = "Scroll of Reduce/Enlarge"
+	cost = 15
+	contains = list(/obj/item/book/granter/spell/blackstone/sizespell)

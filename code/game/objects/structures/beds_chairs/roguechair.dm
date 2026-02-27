@@ -119,7 +119,7 @@
 /obj/structure/chair/wood/rogue
 	icon_state = "chair2"
 	icon = 'icons/roguetown/misc/structure.dmi'
-	item_chair = /obj/item/chair/rogue
+	item_chair = /obj/item/chair/rogue/chair2 //Caustic Edit - Use the proper chair item for each
 	blade_dulling = DULLING_BASHCHOP
 	destroy_sound = 'sound/combat/hits/onwood/destroyfurniture.ogg'
 	attacked_sound = "woodimpact"
@@ -132,7 +132,7 @@
 /obj/structure/chair/wood/rogue/chair3
 	icon_state = "chair3"
 	icon = 'icons/roguetown/misc/structure.dmi'
-	item_chair = /obj/item/chair/rogue
+	item_chair = /obj/item/chair/rogue/chair3 //Caustic Edit - Use the proper chair item for each
 	blade_dulling = DULLING_BASHCHOP
 	destroy_sound = 'sound/combat/hits/onwood/destroyfurniture.ogg'
 	attacked_sound = "woodimpact"
@@ -140,7 +140,7 @@
 /obj/structure/chair/wood/rogue/chair4
 	icon_state = "chair4"
 	icon = 'icons/roguetown/misc/structure.dmi'
-	item_chair = /obj/item/chair/rogue
+	item_chair = /obj/item/chair/rogue/chair4 //Caustic Edit - Use the proper chair item for each
 	blade_dulling = DULLING_BASHCHOP
 	destroy_sound = 'sound/combat/hits/onwood/destroyfurniture.ogg'
 	attacked_sound = "woodimpact"
@@ -148,7 +148,7 @@
 /obj/structure/chair/wood/rogue/chair5
 	icon_state = "chair5"
 	icon = 'icons/roguetown/misc/structure.dmi'
-	item_chair = /obj/item/chair/rogue
+	item_chair = /obj/item/chair/rogue/chair5 //Caustic Edit - Use the proper chair item for each
 	blade_dulling = DULLING_BASHCHOP
 	destroy_sound = 'sound/combat/hits/onwood/destroyfurniture.ogg'
 	attacked_sound = "woodimpact"
@@ -181,6 +181,24 @@
 	attacked_sound = "woodimpact"
 	associated_skill = /datum/skill/combat/unarmed
 	swingsound = BLUNTWOOSH_LARGE
+
+//Caustic Edit - Adding the missing fallen-over chairs!
+/obj/item/chair/rogue/chair2
+	icon_state = "chair_red"
+	origin_type = /obj/structure/chair/wood/rogue
+
+/obj/item/chair/rogue/chair3
+	icon_state = "chair3"
+	origin_type = /obj/structure/chair/wood/rogue/chair3
+
+/obj/item/chair/rogue/chair4
+	icon_state = "chair2"
+	origin_type = /obj/structure/chair/wood/rogue/chair4
+
+/obj/item/chair/rogue/chair5
+	icon_state = "chair_purple"
+	origin_type = /obj/structure/chair/wood/rogue/chair5
+//Caustic Edit End
 
 /obj/item/chair/rogue/getonmobprop(tag)
 	. = ..()
@@ -252,7 +270,7 @@
 	item_chair = /obj/item/chair/rogue/fancy
 
 /obj/item/chair/rogue/fancy
-	icon_state = "chair1"
+	icon_state = "chair_green" //Caustic Edit - Adding the missing fallen-over chairs!
 	origin_type = /obj/structure/chair/wood/rogue/fancy
 
 /obj/structure/chair/wood/rogue/attack_right(mob/user)

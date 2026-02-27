@@ -17,6 +17,7 @@
 	salvage_result = null
 	alternate_worn_layer = NECK_LAYER
 	var/overarmor
+	sellprice = 10 // CC Edit
 
 /obj/item/clothing/ring/MiddleClick(mob/user, params)
 	. = ..()

@@ -91,6 +91,13 @@
 
 /obj/effect/proc_holder/spell/invoked/raise_undead_formation/cast(list/targets, mob/living/user)
 	..()
+	// Caustic Edit Start
+	// Just in case the user doesn't have the spells to manage their minions
+	if(!user.mind.has_spell(/obj/effect/proc_holder/spell/invoked/minion_order))
+		user.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/minion_order)
+	if(!user.mind.has_spell(/obj/effect/proc_holder/spell/invoked/gravemark))
+		user.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/gravemark)
+	// Caustic Edit End
 
 	if(istype(get_area(user), /area/rogue/indoors/ravoxarena))
 		to_chat(user, span_userdanger("I reach for outer help, but something rebukes me! This challenge is only for me to overcome!"))
@@ -165,6 +172,11 @@
 
 /obj/effect/proc_holder/spell/invoked/raise_undead_guard/cast(list/targets, mob/living/user)
 	..()
+	// Caustic Edit Start - Adds Gravmark
+	// We don't give "Order Minion" here because it by design does not work with the stronger undead.
+	if(!user.mind.has_spell(/obj/effect/proc_holder/spell/invoked/gravemark))
+		user.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/gravemark)
+	// Caustic Edit End
 
 	if(istype(get_area(user), /area/rogue/indoors/ravoxarena))
 		to_chat(user, span_userdanger("I reach for outer help, but something rebukes me! This challenge is only for me to overcome!"))

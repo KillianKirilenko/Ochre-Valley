@@ -9,22 +9,26 @@
 	maximum_possible_slots = 1 // We only want one of these.
 	traits_applied = list(TRAIT_CIVILIZEDBARBARIAN, TRAIT_RITUALIST)
 	subclass_stats = list(
-		STATKEY_STR = 3,// LETS WRASSLE
-		STATKEY_WIL = 3,// This is our Go Big stat, we want lots of stamina for miracles and WRASSLIN.
-		STATKEY_LCK = 2,//We have a total of +12 in stats. 
-		STATKEY_CON = 1
+		//Caustic edit
+		STATKEY_STR = 2,
+		STATKEY_WIL = 3,
+		STATKEY_LCK = 1,
+		STATKEY_CON = 2
+		//Caustic edit end
 	)
 	subclass_skills = list(
+		//Caustic edit
 		/datum/skill/magic/holy = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_MASTER,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_MASTER,  // Unarmed if we want to kick ass for the lord(you do, this is what you SHOULD DO!!)
+		/datum/skill/combat/unarmed = SKILL_LEVEL_EXPERT,
+		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,  // Unarmed if we want to kick ass for the lord(you do, this is what you SHOULD DO!!)
 		/datum/skill/craft/crafting = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/carpentry = SKILL_LEVEL_NOVICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/sewing = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/medicine = SKILL_LEVEL_JOURNEYMAN, // We can substitute for a sawbones, but aren't as good and dont have access to surgical tools
-		/datum/skill/misc/athletics = SKILL_LEVEL_MASTER, //We are the True Mathlete
+		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
+		//Caustic edit end
 		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
 	)
 	cmode_music = 'sound/music/Iconoclast.ogg'

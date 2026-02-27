@@ -34,7 +34,13 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	/datum/charflaw/mind_broken::name = /datum/charflaw/mind_broken,
 	/datum/charflaw/noflaw::name = /datum/charflaw/noflaw,
 	/datum/charflaw/leprosy::name = /datum/charflaw/leprosy,
-	/datum/charflaw/randflaw::name = /datum/charflaw/randflaw
+	/datum/charflaw/randflaw::name = /datum/charflaw/randflaw,
+
+	//Caustic edit
+	/datum/charflaw/bottomless::name=/datum/charflaw/bottomless,
+	/datum/charflaw/mind_broken::name=/datum/charflaw/mind_broken,
+	/datum/charflaw/combat_adverse::name=/datum/charflaw/combat_adverse,
+	//Caustic edit end
 	))
 
 GLOBAL_LIST_INIT(averse_factions, list(
@@ -65,6 +71,11 @@ GLOBAL_LIST_INIT(averse_factions, list(
 
 /datum/charflaw/proc/flaw_on_life(mob/user)
 	return
+
+//Caustic Edit - Adding an on_moved call for flaws!
+/datum/charflaw/proc/flaw_on_moved(mob/user, atom/OldLoc, movement_dir)
+	return
+//Caustic Edit End
 
 /mob/proc/has_flaw(flaw)
 	return
@@ -100,13 +111,14 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	name = "No Flaw"
 	desc = "I'm a normal person, how rare!"
 
-/datum/charflaw/noflaw
-	name = "No Flaw (-3 TRI)"
-	desc = "I'm a normal person, how rare! (Consumes 3 triumphs or gives a random flaw.)"
+/datum/charflaw/noflaw // Caustic Cove Edit start - Our rounds are now 4 hours long, so this has to cost a tiny bit more!
+	name = "No Flaw (4 TRI)" // Edit here
+	desc = "I'm a normal person, how rare! (Consumes 4 triumphs or gives a random flaw.)"
+	var/nochekk = TRUE
 
 /datum/charflaw/noflaw/apply_post_equipment(mob/user)
 	var/mob/living/carbon/human/H = user
-	if(H.get_triumphs() < 3)
+	if(H.get_triumphs() < 4) // CC Edit 3 -> 4
 		var/flawz = GLOB.character_flaws.Copy()
 		var/charflaw = pick_n_take(flawz)
 		charflaw = GLOB.character_flaws[charflaw]
@@ -114,7 +126,7 @@ GLOBAL_LIST_INIT(averse_factions, list(
 		H.charflaws.Add(new_flaw)
 		new_flaw.on_mob_creation(H)
 	else
-		H.adjust_triumphs(-3)
+		H.adjust_triumphs(-4) // CC Edit 3 -> 4
 
 /datum/charflaw/randflaw
 	name = "Random"
@@ -537,6 +549,11 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	var/pain_pity_charges = 3
 	var/drugged_up = FALSE
 
+	//Caustic Edit
+	var/immobile_charges = 2
+	var/immobile_reset_count = 2
+	//Caustic Edit End
+
 /datum/charflaw/narcoleptic/on_mob_creation(mob/user)
 	ADD_TRAIT(user, TRAIT_FASTSLEEP, "[type]")
 	reset_timer()
@@ -551,6 +568,10 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	if(user.stat != CONSCIOUS)
 		reset_timer()
 		return
+	//Caustic Edit
+	if(immobile_charges < 1)
+		return
+	//Caustic Edit End
 	if(do_sleep)
 		if(next_sleep <= world.time)
 			var/pain = user.get_complex_pain()
@@ -568,6 +589,9 @@ GLOBAL_LIST_INIT(averse_factions, list(
 					to_chat(user, span_boldwarning("I can't keep my eyes open any longer..."))
 					user.Sleeping(rand(30 SECONDS, 50 SECONDS))
 					user.visible_message(span_warning("[user] suddenly collapses!"))
+				//Caustic Edit - If you stand still, you only have to deal with two iterations of this loop before it'll just cancel early
+				immobile_charges--
+				//Caustic Edit End
 			do_sleep = FALSE
 			last_unconsciousness = world.time
 	else
@@ -580,6 +604,12 @@ GLOBAL_LIST_INIT(averse_factions, list(
 				to_chat(user, span_blue("The drugs keeps me awake, for now..."))
 			else
 				to_chat(user, span_blue("I'm getting drowsy..."))
+
+//Caustic Edit
+/datum/charflaw/narcoleptic/flaw_on_moved(mob/user, atom/OldLoc, movement_dir)
+	if(immobile_charges < immobile_reset_count)
+		immobile_charges = immobile_reset_count
+//Caustic Edit End
 
 /proc/narcolepsy_drug_up(mob/living/living)
 	var/datum/charflaw/narcoleptic/narco = living.get_flaw()
@@ -753,14 +783,18 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	var/time_since = world.time - active_since
 	var/refund = 0
 	switch(time_since)
+		//Caustic Edit - Changing this to reflect the 4-cost no vice instead of 3
 		if(1 to 30 MINUTES)
-			refund = 3
+			refund = 4
 		if(31 MINUTES to 60 MINUTES)
-			refund = 2
+			refund = 3
 		if(61 MINUTES to 90 MINUTES)
+			refund = 2
+		if(91 to 120 MINUTES)
 			refund = 1
-		if(91 to 9999 MINUTES)
+		if(121 to 9999 MINUTES)
 			refund = 0
+		//Caustic Edit End
 	if(refund)
 		to_chat(user, span_info("Refunding Triumphs due to vice."))
 		user.adjust_triumphs(refund)
@@ -797,8 +831,8 @@ GLOBAL_LIST_INIT(averse_factions, list(
 	if(!averse_found)
 		var/list/options = list("Pick a Random Aversion", "Keep Current (-3 TRI)")
 		var/choice = input(user, "There are no viable candidates for your Aversion. What do you do?", "AVERSION ALERT") as anything in options
-		if(choice == "Keep Current (-3 TRI)" || !choice)
-			user.adjust_triumphs(-3)
+		if(choice == "Keep Current (-4 TRI)" || !choice)
+			user.adjust_triumphs(-4)
 			paid_triumphs = TRUE
 		else if(choice == "Pick a Random Aversion")
 			var/new_aversion

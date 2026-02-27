@@ -541,10 +541,12 @@
 	max_integrity = 100
 	armor = ARMOR_PLATE
 	flags_inv = HIDEFACE|HIDESNOUT
-	sellprice = 0
+	sellprice = 25
 
+/* //Caustic Edit - Removing the Naledi Debuff
 /obj/item/clothing/mask/rogue/lordmask/naledi/ComponentInitialize()
 	AddComponent(/datum/component/armour_filtering/positive, TRAIT_NALEDI, "naledi_mask")
+*/ //Caustic Edit End
 
 /obj/item/clothing/mask/rogue/lordmask/naledi/sojourner
 	name = "sojourner's mask"
@@ -554,7 +556,7 @@
 	max_integrity = 150
 	armor = ARMOR_PLATE
 	flags_inv = HIDEFACE|HIDESNOUT
-	sellprice = 0
+	sellprice = 25
 
 /obj/item/clothing/mask/rogue/exoticsilkmask
 	name = "exotic silk mask"

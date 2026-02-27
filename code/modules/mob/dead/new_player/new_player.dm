@@ -416,7 +416,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		else
 			return JOB_UNAVAILABLE_SLOTFULL
 	if(length(job.vice_restrictions) || length(job.virtue_restrictions))
-		var/has_restricted_virtue = (client.prefs.virtue?.type in job.virtue_restrictions) || (client.prefs.virtuetwo?.type in job.virtue_restrictions)
+		var/has_restricted_virtue = (client.prefs.virtue?.type in job.virtue_restrictions) || (client.prefs.virtuetwo?.type in job.virtue_restrictions) || (client.prefs.extravirtue?.type in job.virtue_restrictions)
 		var/has_restricted_vice = FALSE
 		for(var/datum/charflaw/cf in client.prefs.charflaws)
 			if(cf.type in job.vice_restrictions)

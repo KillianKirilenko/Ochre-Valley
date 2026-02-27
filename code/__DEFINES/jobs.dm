@@ -199,6 +199,9 @@
 #define JDO_PILGRIM 8.3
 #define JDO_MERCENARY 8.4
 #define JDO_VETERAN 8.5
+//Caustic edit
+#define JDO_WILDSOUL 8.6
+//Caustic edit end
 
 // Wanderers
 #define JDO_ADVENTURER 9

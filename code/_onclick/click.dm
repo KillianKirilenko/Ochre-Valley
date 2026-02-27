@@ -957,8 +957,7 @@ GLOBAL_LIST_EMPTY(reach_dummy_pool)
 			look_up()
 		else
 			if(istransparentturf(T))
-				var/turf/MT = get_turf(src)
-				if((T in view(MT))) // if we got line of sight, allow player to look down
+				if(A in view(client ? client.view : world.view, src)) //CC Edit, this should unfuck vision
 					look_down(T)
 					return
 			look_further(T)

@@ -35,8 +35,14 @@
 		L.add_stress(/datum/stressevent/parasol_snow)
 		return
 
-	L.adjust_bodytemperature(-rand(5,10))
-
+	//Caustic Edit - Attempt to turn off that cold damage in cold weathers if you wear any kind of cloak-slot item. Simple check for now, can possibly make it more detailed with 'warm clothes' later?
+	if(ishuman(L))
+		var/mob/living/carbon/human/H = L
+		if(!H.cloak)
+			L.adjust_bodytemperature(-rand(5, 15))
+	else
+		L.adjust_bodytemperature(-rand(5, 15))
+	//Caustic Edit End
 
 /datum/particle_weather/snow_storm
 	name = "Rain"
@@ -56,4 +62,18 @@
 
 //Makes you a lot little chilly
 /datum/particle_weather/snow_storm/weather_act(mob/living/L)
-	L.adjust_bodytemperature(-rand(10,25))
+	//Caustic Edit - Attempt to turn off that cold damage in cold weathers if you wear any kind of cloak-slot item. Simple check for now, can possibly make it more detailed with 'warm clothes' later?
+	if(ishuman(L))
+		var/mob/living/carbon/human/H = L
+		if(!H.cloak)
+			L.adjust_bodytemperature(-rand(5, 15))
+	else
+		L.adjust_bodytemperature(-rand(5, 15))
+	//Caustic Edit End
+
+/turf/Exited(atom/movable/gone, direction)
+	if(!istype(gone))
+		return
+	SEND_SIGNAL(src, COMSIG_TURF_EXITED, gone, direction)
+	SEND_SIGNAL(gone, COMSIG_MOVABLE_TURF_EXITED, src, direction)
+

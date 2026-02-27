@@ -10,12 +10,13 @@
 	subclass_spellpoints = 36 //We love casting spells - also no T4 unlike actual court mage so probably fine
 	traits_applied = list(TRAIT_MAGEARMOR, TRAIT_ARCYNE_T3, TRAIT_ALCHEMY_EXPERT)
 	subclass_stats = list(
+		//Caustic edit
 		STATKEY_INT = 3,
 		STATKEY_WIL = 3,
 		STATKEY_PER = 2, // Adv mage get 2 perception so whatever. It is useful for aiming body parts but have no direct synergy with spells. 
-		STATKEY_LCK = 2,
-		STATKEY_SPD = 1,
-		STATKEY_CON = 1,
+		STATKEY_LCK = 1,
+		STATKEY_CON = -1,
+		//Caustic edit end
 	)
 	age_mod = /datum/class_age_mod/court_magician
 	subclass_skills = list(

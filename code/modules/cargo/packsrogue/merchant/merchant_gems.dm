@@ -6,7 +6,7 @@
 
 /datum/supply_pack/rogue/gems/amethyst
 	name = "Amythortz"
-	cost = 25
+	cost = 15
 	contains = list(/obj/item/roguegem/amethyst)
 
 /datum/supply_pack/rogue/gems/toper
@@ -43,6 +43,14 @@
 	name = "Riddle of Steel"
 	cost = 500
 	contains = list(/obj/item/riddleofsteel)
+
+///CC Edit
+/datum/supply_pack/rogue/gems/reform
+	name = "Gem of Reformation"
+	cost = 70
+	contains = list(/obj/item/reformation_gem)
+
+///CC Edit End
 
 //Gemcarving gems. Currently following the 1.6x sell price of the gem format.  This currently makes most gems generally a loss, or at least only minorly profitable, to buy, carve, resell
 

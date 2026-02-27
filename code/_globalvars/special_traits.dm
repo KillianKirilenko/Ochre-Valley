@@ -18,6 +18,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		to_chat(user, span_boldwarning("Requirements: [special.req_text]"))
 
 /proc/try_apply_character_post_equipment(mob/living/carbon/human/character, client/player)
+	apply_prefs_sizecat(character,player) //CC Edit
 	var/datum/job/job
 	if(character.job)
 		job = SSjob.name_occupations[character.job]
@@ -96,6 +97,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 
 	var/datum/virtue/virtue_type = player.prefs.virtue
 	var/datum/virtue/virtuetwo_type = player.prefs.virtuetwo
+	var/datum/virtue/extravirtue_type = player.prefs.extravirtue
 	var/datum/virtue/origin_type = player.prefs.virtue_origin
 	var/language_type = player.prefs.extra_language
 	if(virtue_type)
@@ -108,6 +110,12 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 			apply_virtue(character, virtuetwo_type)
 		else
 			to_chat(character, "Incorrect Second Virtue parameters! It will not be applied.")
+	if(extravirtue_type)
+		if(virtue_check(extravirtue_type, heretic))
+			apply_virtue(character, extravirtue_type)
+		else
+			to_chat(character, "Incorrect Extra Virtue parameters! It will not be applied.")
+			
 	if(origin_type)
 		if((language_type && language_type != "None"))
 			character.grant_language(language_type)

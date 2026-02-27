@@ -118,7 +118,7 @@
 	icon_state = "flour"
 	list_reagents = list(/datum/reagent/floure = 1)
 	volume = 1
-	sellprice = 0
+	sellprice = 5
 	var/water_added
 	experimental_inhand = TRUE
 
@@ -182,7 +182,7 @@
 	icon_state = "salt"
 	list_reagents = list(/datum/reagent/floure = 1)
 	volume = 1
-	sellprice = 0
+	sellprice = 5
 
 /obj/item/reagent_containers/powder/salt/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	new /obj/effect/decal/cleanable/food/flour(get_turf(src))
@@ -237,7 +237,7 @@
 	list_reagents = list(/datum/reagent/floure = 1)
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/preserved/rice_cooked
 	volume = 1
-	sellprice = 0
+	sellprice = 5
 
 /obj/item/reagent_containers/powder/mineral
 	name = "coarse minerals"
@@ -246,7 +246,7 @@
 	icon_state = "salt"
 	list_reagents = list(/datum/reagent/floure = 1)
 	volume = 1
-	sellprice = 0
+	sellprice = 5
 	var/water_added
 
 /obj/item/reagent_containers/powder/coarse_salt
@@ -256,7 +256,7 @@
 	icon_state = "salt"
 	list_reagents = list(/datum/reagent/floure = 1)
 	volume = 1
-	sellprice = 0
+	sellprice = 3
 	color = "#999797"
 	mill_result = /obj/item/reagent_containers/powder/salt
 
@@ -306,7 +306,7 @@
 	list_reagents = list(/datum/reagent/consumable/pumpkinspice = 1)
 	grind_results = list(/datum/reagent/consumable/pumpkinspice = 10)
 	volume = 1
-	sellprice = 0
+	sellprice = 8
 
 /datum/reagent/consumable/pumpkinspice
 	name = "pumpkin spice"

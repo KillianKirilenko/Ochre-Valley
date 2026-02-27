@@ -102,26 +102,20 @@
 	if(!iscarbon(victim))
 		victim.adjustBruteLoss(20)
 	else
-		// FX
-		victim.flash_fullscreen("redflash3")
-		playsound(loc, list(
-			'sound/vo/mobs/plant/attack (1).ogg',
-			'sound/vo/mobs/plant/attack (2).ogg',
-			'sound/vo/mobs/plant/attack (3).ogg',
-			'sound/vo/mobs/plant/attack (4).ogg'
-		), 100, FALSE, -1)
-
-		var/list/limb_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
-		var/zone = null
-		var/obj/item/bodypart/limb = null
-		while(length(limb_zones) && !limb)
-			zone = pick(limb_zones)
-			limb_zones -= zone
-			limb = victim.get_bodypart(zone)
-
-		if(limb)
-			if(limb.get_damage() > 50)
-				if(limb.dismember(damage = 20))
+		var/zone = pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+		var/obj/item/bodypart/limb = victim.get_bodypart(zone)
+		if(!limb)
+			begin_eat(victim)
+		//Caustic Edit
+		if(victim.show_redflash())
+			victim.flash_fullscreen("redflash3")
+		//Caustic Edit End
+		playsound(loc, list('sound/vo/mobs/plant/attack (1).ogg','sound/vo/mobs/plant/attack (2).ogg','sound/vo/mobs/plant/attack (3).ogg','sound/vo/mobs/plant/attack (4).ogg'), 100, FALSE, -1)
+		if(limb.get_damage() > 50)
+			if(limb.dismember(damage = 20))
+				seednutrition += 25
+				if(!victim.mind)
+					victim.gib()
 					seednutrition += 25
 			else
 				victim.apply_damage(60, BRUTE, zone, victim.run_armor_check(zone, BCLASS_CUT, damage = 500))

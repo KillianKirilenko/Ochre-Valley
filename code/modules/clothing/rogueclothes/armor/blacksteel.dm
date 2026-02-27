@@ -5,6 +5,7 @@
 	desc = "A magnificent set of blacksteel plate armor; the greatest triumph of sixteenth-century metallurgy, forged from the rarest of manmade alloys. It befits only the presence of Psydonia's most renowned - be they a hero, a lord, or a monster."
 	icon_state = "bplate"
 	item_state = "bplate"
+	sellprice = 400 // CC Edit
 
 /obj/item/clothing/suit/roguetown/armor/plate/full/blacksteel
 	name = "ancient blacksteel plate armor"
@@ -36,6 +37,7 @@
 	max_integrity = ARMOR_INT_CHEST_PLATE_BLACKSTEEL
 	smeltresult = /obj/item/ingot/blacksteel
 	chunkcolor = "#303036"
+	sellprice = 400
 
 /obj/item/clothing/suit/roguetown/armor/plate/cuirass/blacksteel
 	name = "blacksteel cuirass"
@@ -47,3 +49,4 @@
 	smeltresult = /obj/item/ingot/blacksteel
 	smelt_bar_num = 2
 	chunkcolor = "#303036"
+	sellprice = 200

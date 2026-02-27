@@ -29,6 +29,7 @@
 	anvilrepair = /datum/skill/craft/carpentry
 	COOLDOWN_DECLARE(shield_bang)
 	special = /datum/special_intent/limbguard
+	sellprice = 10
 
 /obj/item/rogueweapon/shield/attackby(obj/item/attackby_item, mob/user, params)
 
@@ -348,6 +349,7 @@
 	parrysound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
 	max_integrity = 300
 	anvilrepair = /datum/skill/craft/weaponsmithing
+	sellprice = 15
 
 /obj/item/rogueweapon/shield/tower/holysee
 	name = "decablessed shield"
@@ -366,7 +368,7 @@
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	max_integrity = 330
-	sellprice = 30
+	sellprice = 50
 
 /obj/item/rogueweapon/shield/tower/holysee/MiddleClick(mob/user, params)
 	. = ..()
@@ -459,6 +461,7 @@
 	max_integrity = 350
 	is_silver = TRUE
 	smeltresult = /obj/item/ingot/silver
+	sellprice = 60
 
 /obj/item/rogueweapon/shield/tower/metal/psy/ComponentInitialize()
 	AddComponent(\
@@ -481,12 +484,14 @@
 	color = "#bb9696"
 	smeltresult = /obj/item/ingot/aaslag
 	anvilrepair = null
+	sellprice = 5
 
 /obj/item/rogueweapon/shield/tower/metal/palloy
 	name = "ancient shield"
 	desc = "A venerable scutum, plated with polished gilbranze. An undying legionnaire's closest friend; that which rebukes arrow-and-bolt alike with unphasing prejudice. It is a reminder - one of many - that Her progress cannot be stopped."
 	icon_state = "ancientsh"
 	smeltresult = /obj/item/ingot/purifiedaalloy
+	sellprice = 5
 
 /obj/item/rogueweapon/shield/tower/raneshen
 	name = "rider shield"
@@ -498,6 +503,7 @@
 	wdefense = 11
 	max_integrity = 220 //not fully metal but not fully wood either
 	anvilrepair = /datum/skill/craft/carpentry
+	sellprice = 22
 
 /obj/item/rogueweapon/shield/tower/raneshen/getonmobprop(tag)
 	. = ..()

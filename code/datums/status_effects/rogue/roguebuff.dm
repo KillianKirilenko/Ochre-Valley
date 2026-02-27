@@ -1049,7 +1049,10 @@
 
 /datum/status_effect/buff/flylordstriage/tick()
 	playsound(owner, 'sound/misc/fliesloop.ogg', 100, FALSE, -1)
-	owner.flash_fullscreen("redflash3")
+	//Caustic Cove Edit
+	if(owner.show_redflash())
+		owner.flash_fullscreen("redflash3")
+	//Caustic Edit End
 	owner.emote("agony")
 	new /obj/effect/temp_visual/flies(get_turf(owner))
 	var/list/wCount = owner.get_wounds()

@@ -18,9 +18,10 @@
 	butcher_results = list(/obj/item/natural/stone = 1)
 
 	pass_flags = PASSMOB //We don't want them to block players.
-	base_intents = list(INTENT_HELP)
-	melee_damage_lower = 1
-	melee_damage_upper = 2
+	possible_rmb_intents = list(/datum/rmb_intent/weak) //We're a weak lil guy!!! ... We can also steal as a weak lil guy!!!
+	base_intents = list(INTENT_HELP, /datum/intent/special/magicarc) //Help, Arc...
+	melee_damage_lower = 10
+	melee_damage_upper = 15
 
 	dextrous = TRUE
 	gender = MALE
@@ -29,6 +30,10 @@
 	turns_per_move = 5
 	mob_size = MOB_SIZE_SMALL
 	density = FALSE
+	// Caustic Edit Start
+	health = 50 // They seem to start off with no HP, this should help. enough to survive most hits at least once, but still die if they endanger themselves.
+	maxHealth = 50
+	// Caustic Edit End
 	see_in_dark = FAMILIAR_SEE_IN_DARK
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	minbodytemp = FAMILIAR_MIN_BODYTEMP
@@ -53,18 +58,113 @@
 	var/mob/living/carbon/familiar_summoner = null
 	var/inherent_spell = null
 	var/summoning_emote = null
+
+	//Stoneform Toad
+	var/icon/original_icon = null
+	var/original_icon_state = ""
+	var/original_icon_living = ""
+	var/original_name = ""
+	var/stoneform = FALSE
+
+	//Mist Lynx
+	var/list/saved_trails = list()
+
+	//Rune Rat
+	var/stored_books = list()
+	var/storage_limit = 5
 	
 //As far as I am aware, you cannot pat out fire as a familiar at least not in time for it to not kill you, this seems fair.
 /mob/living/simple_animal/pet/familiar/fire_act(added, maxstacks)
 	. = ..()
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living, extinguish_mob)), 1 SECONDS)
 
+/mob/living/simple_animal/pet/familiar/proc/choose_spells()
+	if(mind) //Now CHOOSE YOUR POISON!!!
+		var/spells = list("Stillness of Stone", "Veiled Shift", "Inscriptor's Cache", "Soothing Vapors", "Smoldering Shroud", "Glimmering Jaunt", "Verdant Veil", "Grave Scent",
+		"Starseers Cry", "Pyroclastic Puff", "Phantasm Fade", )
+		var/spell_choice_1 = input(src, "Choose your first spell.", "PREPARE YOUR MAGIC.") as anything in spells
+		switch(spell_choice_1)
+			//Allows them to tank damage until they die, up to 50 damage before needing to re-cast.
+			if("Stillness of Stone")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/stillness_of_stone)
+			//Teleportation! Can bring items around with hands from one place to another with ease.
+			if("Veiled Shift")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/lurking_step)
+				mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/veilbound_shift)
+			//Can hold books, spells, papers, notes, etc. Anything that is typepath of Book/Paper.
+			if("Inscriptor's Cache")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/inscription_cache)
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/recall_cache)
+			//Healing AOE, toggle, very weak, only heals 2 damage every 10 seconds.
+			if("Soothing Vapors")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/soothing_bloom)
+			//LOS Blocker, 5 Minute Cooldown as of this comment. Can possibly help in PvE to escape death? 2 tile radius.
+			if("Smoldering Shroud")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/smolder_shroud)
+			//Free Blink! How neat! Allows you to teleport around instantly every 10 seconds.
+			if("Glimmering Jaunt")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/blink/glimmer_hare)
+			//Applies temporary invisibility on everyone around the familiar for 5 seconds.
+			if("Verdant Veil")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/verdant_veil)
+			//Amazing body locating spell, can track corpses and lead others to them.
+			if("Grave Scent")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/scent_of_the_grave)
+			//Reveals anyone invisible/stealthing nearby in a large AOE and makes a comment in chat.
+			if("Starseers Cry")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/starseers_cry)
+			//Portable flint and steel... useless since Prestidigation exists to be quite honest; Spammable however and great for clearing bushes and trees?
+			if("Pyroclastic Puff")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/pyroclastic_puff)
+			//Quite literally doesn't even work... But it's meant to spawn a copy illusion that runs another way. It really has no use and should be replaced with something else.
+			/*if("(PLACEHOLDER YOU SHOULDNT SEE THIS) Phantom Flicker")
+				mind.AddSpell(/obj/effect/proc_holder/spell/self/phantom_flicker) */\
+			//Allows the familiar to go invisible for 15 seconds. Great to throw people off track if you're stealing something, mostly PvP related.
+			if("Phantasm Fade")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/phantasm_fade)
+			//Grows ... Grass! And Bushes! For free! ... Kind of useless and not worth it to farm shit, but cool flavor spell?
+			if("Verdant Sprout")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/verdant_sprout)
+		//Second spell choice. 
+		var/spells_2 = spells - spell_choice_1 //Remove our first choice from the list.
+		var/spell_choice_2 = input(src, "Choose your second spell.", "PREPARE YOUR MAGIC.") as anything in spells_2
+		switch(spell_choice_2)
+			if("Stillness of Stone")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/stillness_of_stone)
+			if("Veiled Shift")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/lurking_step)
+				mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/veilbound_shift)
+			if("Inscriptor's Cache")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/inscription_cache)
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/recall_cache)
+			if("Soothing Vapors")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/soothing_bloom)
+			if("Smoldering Shroud")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/smolder_shroud)
+			if("Glimmering Jaunt")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/blink/glimmer_hare)
+			if("Verdant Veil")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/verdant_veil)
+			if("Grave Scent")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/scent_of_the_grave)
+			if("Starseers Cry")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/starseers_cry)
+			if("Pyroclastic Puff")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/pyroclastic_puff)
+			if("Phantasm Fade")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/phantasm_fade)
+			if("Verdant Sprout")
+				mind.AddSpell(new /obj/effect/proc_holder/spell/self/verdant_sprout)
+			
+		//All familiars get this spell.
+		mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/arcynebolt/familiar)
+
 /mob/living/simple_animal/pet/familiar/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NOFALLDAMAGE1, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_CHUNKYFINGERS, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_INFINITE_STAMINA, TRAIT_GENERIC)
-	AddComponent(/datum/component/footstep, footstep_type)
+	AddComponent(/datum/component/footstep, footstep_type) //Make sure all of them get this fancy Arcyne
 
 /mob/living/simple_animal/pet/familiar/proc/can_bite()
 	for(var/obj/item/grabbing/grab in grabbedby) //Grabbed by the mouth
@@ -118,11 +218,6 @@
     speak_emote = list("croaks low", "grumbles")
     emote_hear = list("croaks lowly.", "lets out a bubbling sound.")
     emote_see = list("shudders like stone.", "thumps softly in place.")
-    var/icon/original_icon = null
-    var/original_icon_state = ""
-    var/original_icon_living = ""
-    var/original_name = ""
-    var/stoneform = FALSE
 
 /datum/status_effect/buff/familiar/settled_weight
 	id = "settled_weight"
@@ -157,7 +252,6 @@
     speak_emote = list("purrs softly", "whispers")
     emote_hear = list("lets out a soft yowl.", "whispers almost silently.")
     emote_see = list("pads in a circle.", "vanishes briefly, then reappears.")
-    var/list/saved_trails = list()
 
 /datum/status_effect/buff/familiar/silver_glance
 	id = "silver_glance"
@@ -188,8 +282,6 @@
     speak_emote = list("squeaks", "chatters")
     emote_hear = list("squeaks thoughtfully.", "sniffs the air.")
     emote_see = list("twitches its tail in patterns.", "skitters in a loop.")
-    var/stored_books = list()
-    var/storage_limit = 5
 
 /datum/status_effect/buff/familiar/threaded_thoughts
 	id = "threaded_thoughts"
@@ -938,6 +1030,18 @@
     speak_emote = "chimes"
     emote_hear = list("chimes.", "clicks.", "makes a faint ticking sound.")
     emote_see = list("glints in the light.", "shifts its crystalline spires.", "spins in a small circle.")
+
+//Familiar Specific Arcyne Bolt to allow for PvE and minor PvP assistance.
+/obj/effect/proc_holder/spell/invoked/projectile/arcynebolt/familiar
+	name = "Familiar's Arcyne Bolt"
+	desc = "Shoot out a rapid bolt of arcyne magic. Inflicts blunt damage similar to a slingstone. \n\
+	Damage is increased by 50% versus simple-minded creechurs.\n\
+	Can be fired in an arc over an ally's head with a mage's staff or spellbook on arc intent. It will deals 25% less damage that way."
+
+	//Works like normal Arcyne Bolt, but fires slower and has a very limited range.
+	range = 6
+	recharge_time = 6 SECONDS
+	human_req = FALSE
 
 #undef FAMILIAR_SEE_IN_DARK
 #undef FAMILIAR_MIN_BODYTEMP

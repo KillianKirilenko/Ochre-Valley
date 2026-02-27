@@ -116,6 +116,14 @@
 	contains = list(
 					/obj/item/rogueweapon/mace/warhammer/steel,
 				)
+//Caustic Edit
+/datum/supply_pack/rogue/steel_weapons/picksteel
+	name = "Steel Pick"
+	cost = 45 // 1 Steel Ingot + Stick
+	contains = list(
+					/obj/item/rogueweapon/pick/steel,
+				)
+//Caustic Edit End
 
 /datum/supply_pack/rogue/steel_weapons/sflangedmace
 	name = "Flanged Mace"

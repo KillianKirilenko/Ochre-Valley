@@ -87,7 +87,10 @@
 							playsound(loc, 'sound/combat/hits/burn (1).ogg', 100, FALSE, -1)
 							user.adjust_fire_stacks(10)
 							user.ignite_mob()
-							user.flash_fullscreen("redflash3")
+							//Caustic Edit
+							if(user.show_redflash())
+								user.flash_fullscreen("redflash3")
+							//Caustic Edit End
 							user.emote("firescream")
 						guidinglight(src) // Actually starts the proc for applying the buff
 						user.apply_status_effect(/datum/status_effect/debuff/ritesexpended)
@@ -226,7 +229,10 @@
 	var/ritualtargets = view(0, loc)
 	for(var/mob/living/carbon/human/target in ritualtargets)
 		to_chat(target,span_userdanger("You feel them crawling into your wounds and pores. Their horrific hum rings through your ears as they do their work!"))
-		target.flash_fullscreen("redflash3")
+		//Caustic Edit
+		if(target.show_redflash())
+			target.flash_fullscreen("redflash3")
+		//Caustic Edit End
 		target.emote("agony")
 		target.Stun(200)
 		target.Knockdown(200)
@@ -1391,7 +1397,7 @@
 	to_chat(target, span_userdanger("UNIMAGINABLE PAIN!"))
 	target.emote("Agony")
 	playsound(loc, 'sound/misc/smelter_fin.ogg', 50)
-	loc.visible_message(span_cult("[target]'s lux pours from their nose, into the rune, gleaming golds sizzles. Molten gold and metals swirl into armor, seered to their skin."))
+	loc.visible_message(span_cult("[target]'s lux pours from their nose, into the rune, gleaming golds sizzles. Molten gold and metals swirl into armor, before straps and buckles secure themselves over them.")) //caustic edit- changing the text here to not be fleshwelded
 	spawn(20)
 		playsound(loc, 'sound/combat/hits/onmetal/grille (2).ogg', 50)
 		target.equipOutfit(/datum/outfit/job/roguetown/gildedrite)

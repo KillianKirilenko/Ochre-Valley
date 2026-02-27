@@ -42,10 +42,13 @@
 	if(is_banned_from(ckey, "LOOC"))
 		to_chat(src, span_danger("I cannot use LOOC (perma muted)."))
 		return
-	
-	if(isobserver(mob) && !holder)
+	//Caustic edit
+	/*
+	if(isobserver(mob))
 		to_chat(src, span_danger("I cannot use LOOC while dead."))
 		return
+	*/
+	//Caustic edit end
 
 	// Lobby restriction: disable LOOC for normal players still in the lobby (new_player)
 	if(!holder && istype(mob, /mob/dead/new_player))

@@ -94,6 +94,8 @@
 	grid_height = 96
 	grid_width = 32
 
+	sellprice = 150 //Master's Rod! His rod!~
+
 /obj/item/rogueweapon/lordscepter/getonmobprop(tag)
 	if(tag)
 		switch(tag)
@@ -171,6 +173,7 @@
 	wdefense = 0
 	var/charge = 100
 	var/on = FALSE
+	sellprice = 80 //Stun meta 2 strong..
 
 /datum/intent/mace/strike/stunner/afterchange()
 	var/obj/item/rogueweapon/mace/stunmace/I = masteritem
@@ -290,6 +293,7 @@
 	grid_height = 64
 	grid_width = 32
 	sharpness_mod = 2	//Can't parry, so it decays quicker on-hit.
+	sellprice = 30
 
 /obj/item/rogueweapon/katar/getonmobprop(tag)
 	. = ..()
@@ -307,6 +311,7 @@
 	icon_state = "abyssorclaw"
 	force = 27	//Its thrust will be able to pen 80 stab armor if the wielder has 17 STR. (With softcap)
 	max_integrity = 80
+	sellprice = 25 //Weird weapon. It's a claw.
 
 /obj/item/rogueweapon/katar/bronze
 	name = "bronze katar"
@@ -315,6 +320,7 @@
 	force = 21 //-3 damage malus, same as the knuckles.
 	max_integrity = 80
 	smeltresult = /obj/item/ingot/bronze
+	sellprice = 14 //Metal on fist? You insane?
 
 /obj/item/rogueweapon/katar/punchdagger
 	name = "punch dagger"
@@ -327,6 +333,7 @@
 	thrown_bclass = BCLASS_STAB
 	possible_item_intents = list(/datum/intent/dagger/thrust, /datum/intent/dagger/thrust/pick)
 	icon_state = "plug"
+	sellprice = 35 //Still a dagger...
 
 /obj/item/rogueweapon/katar/punchdagger/frei
 	name = "vývrtka"
@@ -336,6 +343,7 @@
 	slot_flags = ITEM_SLOT_RING
 	icon = 'icons/roguetown/weapons/special/freifechter32.dmi'
 	possible_item_intents = list(/datum/intent/dagger/thrust, /datum/intent/dagger/thrust/pick, /datum/intent/knuckles/strike)
+	sellprice = 50 // CC Edit
 
 /obj/item/rogueweapon/katar/psydon
 	name = "psydonic katar"
@@ -345,6 +353,7 @@
 	wdefense = 3
 	is_silver = TRUE
 	smeltresult = /obj/item/ingot/silverblessed
+	sellprice = 130
 
 /obj/item/rogueweapon/katar/psydon/ComponentInitialize()
 	AddComponent(\
@@ -365,6 +374,7 @@
 	wdefense = 5
 	is_silver = TRUE
 	smeltresult = /obj/item/ingot/silverblessed
+	sellprice = 130
 
 /obj/item/rogueweapon/knuckles/psydon/ComponentInitialize()
 	AddComponent(\
@@ -386,6 +396,7 @@
 	is_silver = FALSE
 	smeltresult = /obj/item/ingot/steel
 	color = COLOR_FLOORTILE_GRAY
+	sellprice = 70
 
 /obj/item/rogueweapon/knuckles/psydon/old/ComponentInitialize()
 	return
@@ -414,6 +425,8 @@
 	grid_width = 64
 	grid_height = 32
 	special = /datum/special_intent/upper_cut
+	sellprice = 30
+
 /obj/item/rogueweapon/knuckles/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -443,6 +456,7 @@
 	wdefense = 6
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	smeltresult = /obj/item/ingot/bronze
+	sellprice = 20
 
 /obj/item/rogueweapon/knuckles/aknuckles
 	name = "decrepit knuckles"
@@ -453,12 +467,14 @@
 	wdefense = 4
 	smeltresult = /obj/item/ingot/aalloy
 	blade_dulling = DULLING_SHAFT_CONJURED
+	sellprice = 10
 
 /obj/item/rogueweapon/knuckles/paknuckles
 	name = "ancient knuckles"
 	desc = "a set of knuckles made of ancient metals, Aeon's grasp has been lifted from their form."
 	icon_state = "aknuckle"
 	smeltresult = /obj/item/ingot/aaslag
+	sellprice = 10
 
 
 /obj/item/rogueweapon/knuckles/eora
@@ -466,6 +482,7 @@
 	desc = "Some times call for a more intimate approach."
 	icon_state = "eoraknuckle"
 	force = 28 // lower this to 27 if its too much
+	sellprice = 25
 
 ///Peasantry / Militia Weapon Pack///
 
@@ -483,6 +500,7 @@
 	walking_stick = TRUE
 	wdefense = 6
 	max_blade_int = 140
+	sellprice = 10 //Woooood.
 
 /obj/item/rogueweapon/woodstaff/militia/getonmobprop(tag)
 	. = ..()
@@ -507,6 +525,7 @@
 	smeltresult = /obj/item/rogueore/coal
 	wdefense = 4
 	wbalance = WBALANCE_HEAVY
+	sellprice = 20
 
 /obj/item/rogueweapon/greataxe/militia/silver
 	name = "silver militia shovelaxe"
@@ -523,6 +542,7 @@
 	wdefense = 6
 	wbalance = WBALANCE_HEAVY
 	is_silver = TRUE
+	sellprice = 60 //Still militia made. 
 
 /obj/item/rogueweapon/greataxe/militia/silver/ComponentInitialize()
 	AddComponent(\
@@ -567,6 +587,7 @@
 	light_color = "#db892b"
 	var/is_loaded = FALSE
 	var/list/hay_types = list(/obj/structure/fluff/nest, /obj/structure/composter, /obj/structure/flora/roguegrass, /obj/item/reagent_containers/food/snacks/grown/wheat)
+	sellprice = 20
 
 /obj/item/rogueweapon/spear/militia/ComponentInitialize()
 	. = ..()
@@ -711,6 +732,7 @@
 	thrown_bclass = BCLASS_BLUNT
 	throwforce = 10
 	resistance_flags = FLAMMABLE
+	sellprice = 20 //Wooood... Oh but hey a tool!
 
 /obj/item/rogueweapon/scythe/getonmobprop(tag)
 	. = ..()
@@ -742,6 +764,8 @@
 	wdefense = 2
 	wdefense_wbonus = 4
 	wbalance = WBALANCE_NORMAL
+	sellprice = 20
+
 /obj/item/rogueweapon/pick/militia/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -764,6 +788,8 @@
 	wdefense = 3
 	wdefense_wbonus = 5
 	wbalance = WBALANCE_HEAVY
+	sellprice = 30
+
 /obj/item/rogueweapon/pick/militia/steel/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -785,6 +811,7 @@
 	smeltresult = /obj/item/ingot/iron
 	wdefense = 3
 	wbalance = WBALANCE_HEAVY
+	sellprice = 20
 
 /obj/item/rogueweapon/sword/falchion/militia/bronze
 	name = "kopis"
@@ -828,6 +855,7 @@
 	smeltresult = /obj/item/ingot/iron
 	grid_height = 96
 	grid_width = 32
+	sellprice = 20
 
 /obj/item/rogueweapon/handclaw/steel
 	name = "Steel Mantis Claws"
@@ -843,6 +871,7 @@
 	max_integrity = 200
 	smeltresult = /obj/item/ingot/steel
 	sharpness_mod = 2
+	sellprice = 30
 
 /obj/item/rogueweapon/handclaw/gronn
 	name = "Gronn Beast Claws"
@@ -857,6 +886,7 @@
 	wbalance = WBALANCE_SWIFT
 	max_blade_int = 200
 	max_integrity = 200
+	sellprice = 40
 
 
 /obj/item/rogueweapon/handclaw/getonmobprop(tag)
@@ -958,6 +988,7 @@
 	embedding = list("embed_chance" = 0) // Embedding the cursed dagger has the potential to cause duping issues. Keep it like this unless you want to do a lot of bug hunting.
 	resistance_flags = INDESTRUCTIBLE
 	stealthy_audio = TRUE
+	sellprice = 150 //Rare dagger
 
 /obj/item/rogueweapon/huntingknife/idagger/steel/profane/examine(mob/user)
 	. = ..()

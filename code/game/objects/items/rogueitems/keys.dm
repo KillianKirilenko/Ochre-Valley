@@ -577,7 +577,7 @@
 
 /obj/item/roguekey/tavern
 	name = "tavern key"
-	desc = "This key should open and close any tavern door."
+	desc = "This key should open and close the Inn's Staff room and windows." //Caustic Edit - Reclarifying things for our server.
 	icon_state = "hornkey"
 	lockid = "tavern"
 

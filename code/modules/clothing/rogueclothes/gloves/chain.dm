@@ -14,6 +14,7 @@
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
 	unarmed_bonus = 1.15
+	sellprice = 15 
 
 /obj/item/clothing/gloves/roguetown/chain/ComponentInitialize()
 	AddComponent(/datum/component/armour_filtering/negative, TRAIT_FENCERDEXTERITY)
@@ -30,12 +31,14 @@
 	smeltresult = /obj/item/ingot/aaslag
 	anvilrepair = null
 	prevent_crits = PREVENT_CRITS_NONE
+	sellprice = 10 //Ew... AAslag...
 
 /obj/item/clothing/gloves/roguetown/chain/paalloy
 	name = "ancient chain gauntlets"
 	desc = "Polished gilbranze rings, delicately daisy-chained together into mittens. The filament is ruptured, and it will never heal; Zizo's ascension made sure of that. By the hands of Her disciples, the final obstacle preventing this world's salvation shall be dismantled - lyfe."
 	icon_state = "acgloves"
 	smeltresult = /obj/item/ingot/aaslag
+	sellprice = 10 //Ew... AAslag...
 
 /obj/item/clothing/gloves/roguetown/chain/psydon
 	name = "psydonic chain-wrapped gloves"
@@ -44,6 +47,7 @@
 	item_state = "psydongloveschains"
 	smeltresult = null	//So you can't melt down your start gear for blacksteel brigadines etc.
 	var/wrapped = FALSE
+	sellprice = 150 //Pretty good..!
 
 /obj/item/clothing/gloves/roguetown/chain/psydon/attack_right(mob/user)
 	. = ..()
@@ -73,3 +77,4 @@
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/iron
 	max_integrity = ARMOR_INT_SIDE_IRON
+	sellprice = 10

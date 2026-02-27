@@ -3,7 +3,7 @@
 #define GNOLL_SCALING_FLAT    2 // Mode 2: 15% chance, capped at 2 slots
 #define GNOLL_SCALING_SINGLE  3 // Mode 3: Single gnoll. We do nothing in code because this is the default.
 
-GLOBAL_VAR_INIT(gnoll_scaling_mode, 0)
+GLOBAL_VAR_INIT(gnoll_scaling_mode, 3) //Caustic Edit - Just enforcing a flat amount for now, since it's sitting at 4. Can do something more involved later on. Originally was set to 0.
 
 /proc/get_gnoll_scaling()
 	if(GLOB.gnoll_scaling_mode != 0)

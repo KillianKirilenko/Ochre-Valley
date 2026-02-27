@@ -49,6 +49,9 @@
 		OFFSET_FACE_F = list(0,-1), OFFSET_BELT_F = list(0,0), OFFSET_BACK_F = list(0,-1), \
 		OFFSET_NECK_F = list(0,-1), OFFSET_MOUTH_F = list(0,-1), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1), \
+		//Caustic Edit
+		OFFSET_TAUR = list(-16,0), OFFSET_TAUR_F = list(-16,0), \
+		//Caustic End
 		)
 	enflamed_icon = "widefire"
 	bodypart_overrides = list(
@@ -86,13 +89,20 @@
 		/datum/customizer/organ/wings/anthro,
 		/datum/customizer/organ/horns/tusks,
 		/datum/customizer/organ/soul/fire,
-		/datum/customizer/organ/tail/dullahan,
-		/datum/customizer/organ/ears/dullahan,
+		//Caustic edit
+		/datum/customizer/bodypart_feature/legwear,
+		/datum/customizer/organ/tail/anthro,
+		/datum/customizer/organ/tail_feature/anthro,
+		/datum/customizer/organ/ears/anthro,
+		/datum/customizer/organ/frills/anthro,
+		/datum/customizer/organ/neck_feature/anthro,
 		/datum/customizer/organ/testicles/anthro,
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/animal,
-		/datum/customizer/organ/vagina/animal,
-
+		/datum/customizer/organ/vagina/anthro,
+		/datum/customizer/organ/belly/animal,
+		/datum/customizer/organ/butt/animal,
+		//Caustic edit end
 		)
 	body_marking_sets = list(
 		/datum/body_marking_set/none,
@@ -100,7 +110,9 @@
 		/datum/body_marking_set/bellysocks,
 		/datum/body_marking_set/tiger,
 		/datum/body_marking_set/tiger_dark,
+		//Caustic edit
 		/datum/body_marking_set/gradient,
+		//Caustic edit end
 	)
 	body_markings = list(
 		/datum/body_marking/flushed_cheeks,
@@ -120,7 +132,29 @@
 		/datum/body_marking/harlequinreversed,
 		/datum/body_marking/bangs,
 		/datum/body_marking/bun,
+		/datum/body_marking/plain,
+		//Caustic edit
+		/datum/body_marking/tiger,
+		/datum/body_marking/tiger/dark,
+		/datum/body_marking/sock,
+		/datum/body_marking/bellyscale,
+		/datum/body_marking/bellyscaleslim,
+		/datum/body_marking/bellyscalesmooth,
+		/datum/body_marking/bellyscaleslimsmooth,
+		/datum/body_marking/buttscale,
+		/datum/body_marking/belly,
+		/datum/body_marking/bellyslim,
+		/datum/body_marking/butt,
+		/datum/body_marking/tie,
+		/datum/body_marking/tiesmall,
+		/datum/body_marking/backspots,
+		/datum/body_marking/front,
+		/datum/body_marking/drake_eyes,
+		/datum/body_marking/spotted,
+		/datum/body_marking/harlequin,
+		/datum/body_marking/harlequinreversed,
 		/datum/body_marking/gradient,
+		//Caustic edit end
 	)
 	descriptor_choices = list(
 		/datum/descriptor_choice/trait,
@@ -129,7 +163,9 @@
 		/datum/descriptor_choice/body,
 		/datum/descriptor_choice/face,
 		/datum/descriptor_choice/face_exp,
-		/datum/descriptor_choice/skin,
+		//Caustic edit
+		/datum/descriptor_choice/skin_all,
+		//Caustic edit end
 		/datum/descriptor_choice/voice,
 		/datum/descriptor_choice/prominent_one_wild,
 		/datum/descriptor_choice/prominent_two_wild,
@@ -139,8 +175,36 @@
 	languages = list(
 		/datum/language/common,
 	)
+	///Caustic edit
+	allowed_taur_types = list(
+		/obj/item/bodypart/taur/lamia,
+		/obj/item/bodypart/taur/spider,
+		/obj/item/bodypart/taur/horse,
+		/obj/item/bodypart/taur/cow,
+		/obj/item/bodypart/taur/lizard,
+		/obj/item/bodypart/taur/tent,
+		/obj/item/bodypart/taur/tentacle,
+		/obj/item/bodypart/taur/feline,
+		/obj/item/bodypart/taur/slug,
+		/obj/item/bodypart/taur/tempest,
+		/obj/item/bodypart/taur/drake,
+		/obj/item/bodypart/taur/otie,
+		/obj/item/bodypart/taur/wolf,
+		/obj/item/bodypart/taur/alraune,
+		/obj/item/bodypart/taur/frog,
+		/obj/item/bodypart/taur/deer,
+		/obj/item/bodypart/taur/wasp,
+		/obj/item/bodypart/taur/fatwolf,
+		/obj/item/bodypart/taur/fatfeline,
+		/obj/item/bodypart/taur/mermaid,
+		/obj/item/bodypart/taur/altnaga,
+		/obj/item/bodypart/taur/altnagatailmaw,
+		/obj/item/bodypart/taur/fatnaga,
+		/obj/item/bodypart/taur/bunny,
+	)
+	///Caustic edit end
 
-	restricted_virtues = list(/datum/virtue/utility/noble, /datum/virtue/utility/deathless, /datum/virtue/utility/resident)
+	restricted_virtues = list(/datum/virtue/utility/deathless)
 
 	stress_examine = TRUE
 	stress_desc = span_red("Accursed. I should keep my distance...")

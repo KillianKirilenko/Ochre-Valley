@@ -1,15 +1,17 @@
 /datum/advclass/mercenary/trollslayer
 	name = "Trollslayer" // barbarian-like subclass with soft-nudist (no armor) and no Fast Reflexes, supposed to soak up damage with their con and skinarmor and chop shit up with class-exclusive axes
-	tutorial = "Atop the windy peaks of the dwarven Mountainhomes, you swore an Oath, vowing to cleanse the land of monsters or die trying. You give yourself wholly to the Battlefather’s judgment, bearing your devotion as armor and your rage as a weapon. No creacher upon this world is safe from your divine wrath."
-	allowed_races = list(
+	//Caustic Cove Edit - Allow anyone to be a Slayer, not just Dwarves.
+	tutorial = "Atop the windy peaks in a mountain shrine, you swore an Oath, vowing to cleanse the land of monsters or die trying. You give yourself wholly to the Battlefather’s judgment, bearing your devotion as armor and your rage as a weapon. No creacher upon this world is safe from your divine wrath."
+	/*allowed_races = list(
 		/datum/species/dwarf,
 		/datum/species/dwarf/mountain
-		)
+		)*/
+	//Caustic Cove Edit End
 	outfit = /datum/outfit/job/roguetown/mercenary/trollslayer
 	category_tags = list(CTAG_MERCENARY)
 	class_select_category = CLASS_CAT_RACIAL
 	cmode_music = 'sound/music/combat_dwarf.ogg'
-	extra_context = "Only the dwarves who swore an Oath to the ten may become Trollslayers." // dwarf exclusive and will force Ravox
+	extra_context = "Only those warriors who swore an Oath to the God of Craft or the God of Justice may become Trollslayers." //Caustic Edit - changing it to be non-dwarf specific, and clear on the dieties // dwarf exclusive and will force Ravox
 
 	traits_applied = list(TRAIT_CRITICAL_RESISTANCE, TRAIT_SHIRTLESS) //TRAIT_SHIRTLESS prevents equip on the head, armor and shirt slots and enables class-specific weapons
 	subclass_stats = list( 
@@ -157,7 +159,7 @@
 	qdel(src)
 
 /obj/item/clothing/suit/roguetown/armor/regenerating/slayer/obj_destruction()
-	visible_message(span_bloody("The dwarf flinches from the blow!"), vision_distance = 3) // visual que for breaking
+	visible_message(span_bloody("The slayer flinches from the blow!"), vision_distance = 3) //Caustic Cove edit - from Dwarf to Slayer // visual que for breaking
 
 /obj/effect/proc_holder/spell/self/axedance
 	name = "Dance of the Axes" // rage button. gives maniac traits, some stats and removes the user's ability to dodge and parry. dunks stamina on expiration

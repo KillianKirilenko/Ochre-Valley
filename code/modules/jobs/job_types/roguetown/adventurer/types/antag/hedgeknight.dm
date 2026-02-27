@@ -2,18 +2,22 @@
 	name = "Hedge Knight"
 	tutorial = "A noble fallen from grace, your tarnished armor sits upon your shoulders as a heavy reminder of the life you've lost. Take back what is rightfully yours."
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_NO_CONSTRUCT
+	allowed_races = RACES_ALL_KINDS //Caustic edit from RACES_NO_CONSTRUCT
 	outfit = /datum/outfit/job/roguetown/bandit/hedgeknight
 	category_tags = list(CTAG_BANDIT)
-	maximum_possible_slots = 1 //Boss, you killed a squire. AMAZING this right here is why you are the best Boss!
+	//Caustic edit
+	maximum_possible_slots = 1 //The right hand man of the Iconoclast
+	//Caustic edit end
 	cmode_music = 'sound/music/cmode/antag/combat_thewall.ogg' // big chungus gets the wall too
 	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_NOBLE) //Heavy armour gives medium already
 	subclass_stats = list(
+		//Caustic edit
 		STATKEY_CON = 3, //dark souls 3 dual greatshield moment
 		STATKEY_STR = 2,
-		STATKEY_WIL = 3,
-		STATKEY_LCK = 2,
-		STATKEY_INT = 2,
+		STATKEY_WIL = 2,
+		STATKEY_LCK = 1,
+		STATKEY_SPD = -1
+		//Caustic edit end
 	)
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,

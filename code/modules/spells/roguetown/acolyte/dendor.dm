@@ -93,8 +93,8 @@
 	var/turf/T = user.loc
 	for(var/X in GLOB.cardinals)
 		var/turf/TT = get_step(T, X)
-		if(!isclosedturf(TT) && !locate(/obj/structure/glowshroom) in TT)
-			new /obj/structure/glowshroom(TT)
+		if(!isclosedturf(TT) && !locate(/obj/structure/glowshroom) in TT) //caustic edit start
+			new /obj/structure/glowshroom/dendorite(TT) //caustic edit end
 	return TRUE
 /obj/effect/proc_holder/spell/targeted/conjure_vines
 	name = "Vine Sprout"

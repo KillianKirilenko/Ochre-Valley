@@ -258,6 +258,11 @@
 #define TRAIT_WEATHER_PROTECTED "Weather Protected"
 #define TRAIT_VAMPIRE_SPAWN_PROTECTION "Vampire Spawn Protection"
 
+//Caustic edit
+#define TRAIT_NECRAS_ABATEMENT "Necra's Abatement" //keeps deadites from doing much of anything in town
+#define TRAIT_FERAL "Feral Natured" //likes being in the woods, hates being in the city
+//Caustice edit end
+
 // Economic Roles Traits
 // Most of these should NOT be given to any true combat roles (I.E. anything with Dexpert or Miracle / Good Magic) with very few exceptions
 // Pilgrims and non-combat roles can have these as a treat
@@ -489,6 +494,12 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_TEMPO	= span_greentext("I can keep up with multiple opponents at once."),
 	TRAIT_BLACKOAK = span_warning("The Black Oaks can spot <b>any</b> foreigners and outsiders, no matter how long they've lived in Azuria. I can spot an invader at a glance."),
 	TRAIT_DREAMWALKER = span_warning("I walk the dream and reality at the same time. My mind frays, but my vision shall be reality."),
+	//Caustic edit
+	TRAIT_NATURAL_ARMOR = span_notice("My hide is thick and resilient. It will regenerate so long as I keep it fed..."),
+	TRAIT_FERAL = span_info("The wilds is where I am meant to be. Civilized realms are no place for the likes of me."),
+	TRAIT_NECRAS_ABATEMENT = span_info("The Undermaiden's gaze lingers upon me, and intensifies as I draw closer to hallowed ground."),
+
+	//Caustic edit end
 	TRAIT_ENGINEERING_GOGGLES = span_warning("I can see structural details others can't."),
 	TRAIT_ASSASSIN = span_warning("My soul has been tainted by foul spirits, through them I honor my pact."),
 	TRAIT_MASTER_CARPENTER = span_warning("I've been trained to make the most of wood"),

@@ -171,7 +171,11 @@
 			visible_message("<span class='danger'>[src] crashes into [victim]!",\
 				"<span class='danger'>I violently crash into [victim]!</span>")
 			playsound(src,"genblunt",100,TRUE)
-
+			var/nomprob
+			if(voremode)
+				nomprob = ((get_stat(STATKEY_LCK - 10) * 10) + ((get_stat(STATKEY_STR) - 10) * 10) + (get_stat(STATKEY_SPD)))
+				if(prob(nomprob))
+					spontaneous_vore_attackby(victim, src)
 
 
 //Throwing stuff
@@ -999,6 +1003,7 @@
 		overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
 	else
 		clear_fullscreen("brute")*/
+
 	if(show_redflash())
 		var/hurtdamage = ((get_complex_pain() / (STAWIL * 10)) * 100) //what percent out of 100 to max pain
 		if(hurtdamage > 5) //float
@@ -1010,17 +1015,23 @@
 					severity = 2
 				if(40 to 60)
 					severity = 3
-					overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
+					if(!check_epilepsy())
+						overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
 				if(60 to 80)
 					severity = 4
-					overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
+					if(!check_epilepsy())
+						overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
 				if(80 to 99)
 					severity = 5
-					overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
+					if(!check_epilepsy())
+						overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
 				if(99 to INFINITY)
 					severity = 6
-					overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
-			overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
+					if(!check_epilepsy())
+						overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
+			
+			if(!check_epilepsy())
+				overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
 		else
 			clear_fullscreen("brute")
 			clear_fullscreen("painflash")
@@ -1062,7 +1073,10 @@
 			src.apply_status_effect(/datum/status_effect/buff/undermaidenbargainheal)
 			return
 		if(health <= HEALTH_THRESHOLD_DEAD && !HAS_TRAIT(src, TRAIT_NODEATH))
-			INVOKE_ASYNC(src, PROC_REF(emote), "deathgurgle")
+			//Cove edit start
+			if (!istype(loc, /obj/belly))
+			//Cove edit end
+				INVOKE_ASYNC(src, PROC_REF(emote), "deathgurgle")
 			death()
 			cure_blind(UNCONSCIOUS_BLIND)
 			return

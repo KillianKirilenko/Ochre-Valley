@@ -19,7 +19,7 @@
 	advclass_cat_rolls = list(CTAG_WARDEN = 20)
 
 	give_bank_account = TRUE
-	min_pq = 0
+	min_pq = null //0
 	max_pq = null
 	round_contrib_points = 2
 
@@ -27,7 +27,10 @@
 	job_traits = list(TRAIT_OUTDOORSMAN, TRAIT_WOODSMAN, TRAIT_SURVIVAL_EXPERT)
 	job_subclasses = list(
 		/datum/advclass/warden/ranger,
-		/datum/advclass/warden/forester
+		/datum/advclass/warden/forester,
+		///Caustic edit
+		/datum/advclass/warden/wildsoul
+		///Caustic edit end
 	)
 
 /datum/outfit/job/roguetown/warden

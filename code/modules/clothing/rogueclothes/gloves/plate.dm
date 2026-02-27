@@ -13,6 +13,7 @@
 	equip_sound = 'sound/foley/equip/equip_armor_plate.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
+	sellprice = 17
 
 	grid_width = 64
 	grid_height = 32
@@ -28,6 +29,7 @@
 	icon_state = "igauntlets"
 	smeltresult = /obj/item/ingot/iron
 	max_integrity = ARMOR_INT_SIDE_IRON
+	sellprice = 12
 
 /obj/item/clothing/gloves/roguetown/plate/aalloy
 	name = "decrepit plate gauntlets"
@@ -40,18 +42,21 @@
 	smeltresult = /obj/item/ingot/aaslag
 	anvilrepair = null
 	prevent_crits = PREVENT_CRITS_NONE
+	sellprice = 5
 
 /obj/item/clothing/gloves/roguetown/plate/paalloy
 	name = "ancient plate gauntlets"
 	desc = "Polished gilbranze mechanisms, meticulously interconnected to shroud splayed hands. 'Mercy' and 'innocence' are concepts paraded by the unenlightened; spill their blood without guilt, so that the world may yet be remade in Her image." 
 	icon_state = "agauntlets"
 	smeltresult = /obj/item/ingot/aaslag
+	sellprice = 5
 
 /obj/item/clothing/gloves/roguetown/plate/graggar
 	name = "vicious gauntlets"
 	desc = "Fluted gauntlets, razor-tipped and fluidic in motion. Most are led to believe that 'might makes right', yet Graggar's truth is far more succinct - 'might makes'. Murder is the ultimate force; the only difference between you and them is that they're too afraid to admit it."
 	max_integrity = ARMOR_INT_SIDE_ANTAG
 	icon_state = "graggarplategloves"
+	sellprice = 44 //Heretical~
 
 /obj/item/clothing/gloves/roguetown/plate/graggar/Initialize()
 	. = ..()
@@ -63,6 +68,7 @@
 	icon_state = "matthiosgloves"
 	max_integrity = ARMOR_INT_SIDE_ANTAG
 
+/* //Caustic Edit - Allow dropping of Heretic Armors (so fun can happen :P)
 /obj/item/clothing/gloves/roguetown/plate/matthios/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
@@ -72,7 +78,7 @@
 	if(QDELETED(src))
 		return
 	qdel(src)
-
+*/ //Caustic Edit End
 
 /obj/item/clothing/gloves/roguetown/plate/zizo
 	name = "avantyne gauntlets"
@@ -81,7 +87,9 @@
 	max_integrity = ARMOR_INT_SIDE_ANTAG
 	chunkcolor = "#363030"
 	material_category = ARMOR_MAT_PLATE
+	sellprice = 44 //CC Edit
 
+/* //Caustic Edit - Allow dropping of Heretic Armors (so fun can happen :P)
 /obj/item/clothing/gloves/roguetown/plate/zizo/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
@@ -91,6 +99,7 @@
 	if(QDELETED(src))
 		return
 	qdel(src)
+*/ //Caustic Edit End
 
 /obj/item/clothing/gloves/roguetown/plate/shadowgauntlets
 	name = "darkplate gauntlets"
@@ -111,6 +120,7 @@
 	color = "#FFFFFF"
 	detail_color = "#FFFFFF"
 	var/picked = FALSE
+	sellprice = 30
 
 /obj/item/clothing/gloves/roguetown/plate/kote/attack_right(mob/user)
 	..()

@@ -77,6 +77,7 @@
 //Generic Bump(). Override MobBump() and ObjBump() instead of this.
 /mob/living/Bump(atom/A)
 	if(..()) //we are thrown onto something
+		//spontaneous_vore_attackby(A, src) ^^^ read 3 lines above
 		return
 	if (buckled || now_pushing)
 		return
@@ -250,10 +251,22 @@
 					visible_message(span_warning("[src] smashes into [L] with no headstart!"), span_warning("I charge into [L] too early!"))
 				if(clash_blocked)
 					visible_message(span_warning("[src] gets tripped by [L]!"), span_warning("I get tripped by [L]!"))
+					/*if(voremode)
+						if(prob(50))
+							vore_attack_instant(src, L, src) <-- TODO readd this
+						else
+							return TRUE*/
 			else
 				visible_message(span_warning("[src] charges into [L]!"), span_warning("I charge into [L]!"))
 			return TRUE
-
+	///Caustic edit
+	if(ishuman(M) && ishuman(src))
+		var/mob/living/carbon/human/srchuman = src
+		if(srchuman.handle_micro_bump_helping(M))
+			forceMove(M.loc)
+			now_pushing = FALSE
+			return TRUE
+	///Caustic edit end
 	//okay, so we didn't switch. but should we push?
 	//not if he's not CANPUSH of course
 	if(!(M.status_flags & CANPUSH))
@@ -718,6 +731,7 @@
 
 /mob/living/proc/setMaxHealth(newMaxHealth)
 	maxHealth = newMaxHealth
+
 
 // MOB PROCS //END
 

@@ -23,7 +23,7 @@
 		STAINT = 8
 
 		AddSpell(new /obj/effect/proc_holder/spell/self/bearclaws)
-		real_name = "direbear"
+		real_name = "Direbear"
 		faction += "bears"
 
 /mob/living/carbon/human/species/wildshape/bear/buckle_mob(mob/living/target, force = TRUE, check_loc = TRUE, lying_buckle = FALSE, hands_needed = 0, target_hands_needed = 0)

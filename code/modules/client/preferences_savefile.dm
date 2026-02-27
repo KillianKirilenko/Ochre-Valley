@@ -204,7 +204,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["tip_delay"]			>> tip_delay
 	S["pda_style"]			>> pda_style
 	S["pda_color"]			>> pda_color
-
+	///Caustic edit
+	S["epilepsy"]			>> epilepsy
+	///Caustic edit end
 	// Custom hotkeys
 	S["key_bindings"]		>> key_bindings
 
@@ -249,7 +251,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	pda_style		= sanitize_inlist(pda_style, GLOB.pda_styles, initial(pda_style))
 	pda_color		= sanitize_hexcolor(pda_color, 6, 1, initial(pda_color))
 	key_bindings 	= sanitize_islist(key_bindings, list())
-
+	masked_examine  = sanitize_integer(masked_examine, 0, 1, initial(masked_examine))
 	//ROGUETOWN
 	parallax = PARALLAX_INSANE
 
@@ -344,6 +346,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["pda_color"], pda_color)
 	WRITE_FILE(S["key_bindings"], key_bindings)
 	WRITE_FILE(S["attack_blip_frequency"] , attack_blip_frequency)
+
+	///Caustic edit
+	WRITE_FILE(S["epilepsy"], epilepsy)
+	///Caustic edit end
+	
 	return TRUE
 
 
@@ -424,6 +431,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	else
 		virtue_origin = new /datum/virtue/none
 
+	load_extra_virtue(S)
+
 /datum/preferences/proc/_load_gear_list(savefile/S)
 	S["gear_list"] >> gear_list
 	if(!islist(gear_list))
@@ -432,6 +441,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	for(var/item_name in gear_list)
 		if(!(item_name in GLOB.loadout_items_by_name))
 			gear_list -= item_name
+
 
 /datum/preferences/proc/_load_height(S)
 	var/preview_height
@@ -525,9 +535,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	_load_virtue(S)
 	_load_flaw(S)
-
+	//Caustic edit
+	_load_sizecat(S)
+	_load_pickupable(S)
+	//Caustic edit end
 	_load_culinary_preferences(S)
-
 	// LETHALSTONE edit: jank-ass load our statpack choice
 	_load_statpack(S)
 
@@ -713,6 +725,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	S["customizer_entries"] >> customizer_entries
 	validate_customizer_entries()
+	if(parent.prefs_vr)
+		parent.prefs_vr.load_vore()
+	//load_vore_prefs(S)
 
 	return TRUE
 
@@ -841,6 +856,13 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["familiar_ooc_extra"] , familiar_prefs.familiar_ooc_extra)
 	WRITE_FILE(S["familiar_ooc_extra_link"] , familiar_prefs.familiar_ooc_extra_link)
 
+
+
+	//Caustic edit
+	save_sizecat(S)
+	save_extra_virtue(S)
+	save_pickupable(S)
+	//Caustic edit end
 	return TRUE
 
 

@@ -11,6 +11,7 @@
 	experimental_inhand = TRUE
 	var/overarmor = TRUE
 	var/storage = TRUE
+	sellprice = 5 //Identity Protection!
 
 	grid_width = 64
 	grid_height = 64
@@ -58,6 +59,7 @@
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
 	flags_inv = HIDECROTCH|HIDEBOOB
 	var/custom_design = FALSE
+	sellprice = 3
 
 /obj/item/clothing/cloak/tabard/update_icon()
 	cut_overlays()
@@ -151,6 +153,7 @@
 	item_state = "abyssortabard"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	custom_design = TRUE
+	sellprice = 10 //Religious...
 
 /obj/item/clothing/cloak/tabard/psydontabard
 	name = "psydonian tabard"
@@ -162,6 +165,7 @@
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
 	custom_design = TRUE
 	var/open_wear = FALSE
+	sellprice = 10 //Religious...
 
 /obj/item/clothing/cloak/tabard/psydontabard/alt
 	name = "opened psydonian tabard"
@@ -171,6 +175,7 @@
 	item_state = "psydontabardalt"
 	flags_inv = HIDECROTCH
 	open_wear = TRUE
+	sellprice = 10 //Religious...
 
 /obj/item/clothing/cloak/tabard/psydontabard/MiddleClick(mob/user)
 	..()
@@ -372,6 +377,7 @@
 	detail_tag = "_psy"
 	detail_color = CLOTHING_RED
 	boobed_detail = FALSE
+	sellprice = 10 //Religious ties.
 
 /obj/item/clothing/cloak/tabard/crusader/Initialize()
 	. = ..()
@@ -676,6 +682,7 @@
 	allowed_race = NON_DWARVEN_RACE_TYPES
 	salvage_result = /obj/item/natural/fur
 	cold_protection = 20
+	sellprice = 9 //Furry...
 
 /obj/item/clothing/cloak/darkcloak/bear
 	name = "direbear cloak"
@@ -685,6 +692,7 @@
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 3
+	sellprice = 12
 
 /obj/item/clothing/cloak/darkcloak/bear/light
 	name = "light direbear cloak"
@@ -693,6 +701,7 @@
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 3
+	sellprice = 10
 
 /obj/item/clothing/cloak/darkcloak/minotaur
 	name = "minotaur cloak"
@@ -717,6 +726,7 @@
 	boobed = TRUE
 	allowed_race = CLOTHED_RACES_TYPES
 	flags_inv = HIDECROTCH|HIDEBOOB
+	sellprice = 8
 
 /obj/item/clothing/cloak/apron/blacksmith
 	name = "leather apron"
@@ -773,6 +783,7 @@
 	hoodtype = /obj/item/clothing/head/hooded/rainhood
 	toggle_icon_state = FALSE
 	salvage_result = /obj/item/natural/hide/cured
+	sellprice = 6 //Rain protector...
 
 /obj/item/clothing/cloak/raincloak/red
 	color = CLOTHING_RED
@@ -808,6 +819,7 @@
 	body_parts_covered = HEAD
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDETAIL
 	block2add = FOV_BEHIND
+	sellprice = 4
 
 /obj/item/clothing/cloak/raincloak/furcloak
 	name = "fur cloak"
@@ -853,6 +865,7 @@
 	nodismemsleeves = TRUE
 	inhand_mod = FALSE
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
+	sellprice = 6 //Pretty cape.
 
 /obj/item/clothing/cloak/cape/purple
 	color = CLOTHING_PURPLE
@@ -885,11 +898,13 @@
 	allowed_race = CLOTHED_RACES_TYPES
 	salvage_result = /obj/item/natural/silk
 	salvage_amount = 1
+	sellprice = 8 //Pretty...
 
 /obj/item/clothing/cloak/cape/archivist
 	icon_state = "puritan_cape"
 	color = CLOTHING_BLACK
 	allowed_race = CLOTHED_RACES_TYPES
+	sellprice = 7
 
 /obj/item/clothing/cloak/cape/inquisitor
 	name = "Inquisitors Cloak"
@@ -898,6 +913,7 @@
 	icon = 'icons/roguetown/clothing/cloaks.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+	sellprice = 25 //Important cloak...
 
 /obj/item/clothing/cloak/cape/rogue
 	name = "cape"
@@ -916,6 +932,7 @@
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
 	inhand_mod = TRUE
 	salvage_result = /obj/item/natural/fur
+	sellprice = 7 //Fluffy!
 
 /obj/item/clothing/cloak/chasuble
 	name = "chasuble"
@@ -928,6 +945,7 @@
 	allowed_sex = list(MALE, FEMALE)
 	allowed_race = NON_DWARVEN_RACE_TYPES
 	nodismemsleeves = TRUE
+	sellprice = 10 //Stylish.
 
 /obj/item/clothing/cloak/stole
 	name = "stole"
@@ -938,6 +956,7 @@
 	sleevetype = null
 	body_parts_covered = null
 	flags_inv = null
+	sellprice = 9 //Kinda stylish
 
 /obj/item/clothing/cloak/stole/red
 	icon_state = "stole_red"
@@ -980,6 +999,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	alternate_worn_layer = CLOAK_BEHIND_LAYER
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
+	sellprice = 15 //Religious...
 
 /obj/item/clothing/cloak/half
 	name = "halfcloak"
@@ -999,6 +1019,7 @@
 	allowed_sex = list(MALE, FEMALE)
 	flags_inv = null
 	var/flipped = FALSE
+	sellprice = 5  //Half!?
 
 /obj/item/clothing/cloak/half/attack_right(mob/user)
 	if(!flipped)
@@ -1081,6 +1102,7 @@
 	flags_inv = HIDECROTCH|HIDEBOOB
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+	sellprice = 9 //Scary volf...
 
 /obj/item/clothing/cloak/wickercloak
 	name = "wicker cloak"
@@ -1096,6 +1118,7 @@
 	inhand_mod = TRUE
 	salvage_result = /obj/item/natural/fibers
 	salvage_amount = 2
+	sellprice = 3 //Wtf is this?
 
 /obj/item/clothing/cloak/wickercloak/ComponentInitialize()
 	. = ..()
@@ -1136,6 +1159,7 @@
 	nodismemsleeves = TRUE
 	detail_tag = "_detail"
 	detail_color = CLOTHING_BLACK
+	sellprice = 25 //Expensive clothing..~ How nice~
 
 /obj/item/clothing/cloak/matron
 	name = "matron cloak"
@@ -1150,6 +1174,7 @@
 	nodismemsleeves = TRUE
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
+	sellprice = 25 //ooh stylish~
 
 /obj/item/clothing/cloak/battlenun
 	name = "nun vestments"
@@ -1161,6 +1186,7 @@
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
+	sellprice = 12
 
 /obj/item/clothing/cloak/templar/MiddleClick(mob/user)
 	overarmor = !overarmor
@@ -1213,6 +1239,7 @@
 	nodismemsleeves = TRUE
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
 	flags_inv = HIDECROTCH|HIDEBOOB
+	sellprice = 10
 
 /obj/item/clothing/cloak/templar/ravox
 	name = "justice tabard"
@@ -1404,6 +1431,7 @@
 	icon_state = "guard_hood" // The same as the guard hood however to break it from using the lords colors it has been given its own item path
 	item_state = "guard_hood"
 	body_parts_covered = CHEST
+	sellprice = 15 //Fashionable.
 
 /obj/item/clothing/cloak/wardencloak
 	name = "warden's cloak"
@@ -1416,6 +1444,7 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
+	sellprice = 15
 
 /obj/item/clothing/cloak/graggar
 	name = "vicious cloak"
@@ -1427,6 +1456,7 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
+	sellprice = 25  //Heretical...
 
 /obj/item/clothing/cloak/graggar/Initialize()
 	. = ..()
@@ -1567,6 +1597,7 @@
 	detail_color = "#36241f"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_cloaks.dmi'
 	sleevetype = "cotehardie"
+	sellprice = 10 //Nice...
 
 /obj/item/clothing/cloak/cotehardie/update_icon()
 	cut_overlays()
@@ -1605,6 +1636,7 @@
 	detail_tag = "_detail"
 	alternate_worn_layer = CLOAK_BEHIND_LAYER
 	detail_color = "#39404d"
+	sellprice = 45 //Stylish~
 
 /obj/item/clothing/cloak/banneret/Initialize()
 	. = ..()
@@ -1629,6 +1661,7 @@
 	body_parts_covered = null
 	icon_state = "maidapron"
 	item_state = "maidapron"
+	slot_flags = ITEM_SLOT_BACK_L|ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK // CC Edit
 	icon = 'icons/roguetown/clothing/special/maids.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/maids.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/maids.dmi'

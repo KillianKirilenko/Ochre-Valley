@@ -147,7 +147,15 @@
 				. += span_notice("A practitioner of the old ways.")
 			else
 				. += span_notice("Something about them seems... different.")
-
+// Caustic Edit Start
+		if(HAS_TRAIT(src, TRAIT_FERAL))
+			if(HAS_TRAIT(user, TRAIT_NOBLE) || HAS_TRAIT(user, TRAIT_INQUISITION) || HAS_TRAIT(user, TRAIT_WITCH))
+				. += span_warning("A savage wild-folk! Dangerous to let one's guard down around.")
+			else if(HAS_TRAIT(user, TRAIT_FREEMAN) || HAS_TRAIT(user, TRAIT_CABAL) || HAS_TRAIT(user, TRAIT_HORDE) || HAS_TRAIT(user, TRAIT_DEPRAVED))
+				. += span_notice("A denizen of the wilds.")
+			else
+				. += span_notice("Something about them seems... predatory.")
+// Caustic Edit End
 		if(SSticker.rulermob == src)
 			. += span_notice("<b>The ruler of this land.</b>")
 		else if(GLOB.lord_titles[name])
@@ -562,7 +570,12 @@
 		if (is_stupid)
 			str = "[m3] something on [m2] wrists!"
 		. += str
-
+	//caustic edit
+	if(!(skin_armor == null))
+		var/str = "[m1] protected by [skin_armor]. "
+		str += skin_armor.integrity_check() //not tied to 'smart' because wild souls aren't
+		. += str
+	//caustic edit end
 	//handcuffed?
 	if(handcuffed)
 		if(user == src)
