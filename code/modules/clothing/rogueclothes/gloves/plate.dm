@@ -79,6 +79,12 @@
 	qdel(src)
 */ //Caustic Edit End
 
+// OV edit start
+/obj/item/clothing/gloves/roguetown/plate/matthios/Initialize()
+	. = ..()
+	AddComponent(/datum/component/cursed_item, TRAIT_COMMIE, "ARMOR")
+// OV edit end
+
 /obj/item/clothing/gloves/roguetown/plate/zizo
 	name = "avantyne gauntlets"
 	desc = "Unknowing truths, veiling the hands that prayed. Called forth from the edge of what should be known, in Her name."
@@ -98,6 +104,12 @@
 		return
 	qdel(src)
 */ //Caustic Edit End
+
+// OV edit start
+/obj/item/clothing/gloves/roguetown/plate/zizo/Initialize()
+	. = ..()
+	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "ARMOR")
+// OV edit end
 
 /obj/item/clothing/gloves/roguetown/plate/shadowgauntlets
 	name = "darkplate gauntlets"

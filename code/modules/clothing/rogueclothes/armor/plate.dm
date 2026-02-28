@@ -344,6 +344,12 @@
 	qdel(src)
 */ //Caustic Edit End
 
+// OV edit start
+/obj/item/clothing/suit/roguetown/armor/plate/full/matthios/Initialize()
+	. = ..()
+	AddComponent(/datum/component/cursed_item, TRAIT_COMMIE, "ARMOR")
+// OV edit end
+
 /obj/item/clothing/suit/roguetown/armor/plate/full/zizo
 	name = "avantyne fullplate"
 	desc = "Impossible angularities, molded into a form more comprehensible to the layman's eyes. It has been called forth from the edge of what should be known, in Her name."
@@ -364,6 +370,12 @@
 		return
 	qdel(src)
 */ //Caustic Edit End
+
+// OV edit start
+/obj/item/clothing/suit/roguetown/armor/plate/full/zizo/Initialize()
+	. = ..()
+	AddComponent(/datum/component/cursed_item, TRAIT_CABAL, "ARMOR")
+// OV edit end
 
 /obj/item/clothing/suit/roguetown/armor/plate/full/bikini
 	name = "full-plate corset"
