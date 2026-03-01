@@ -4,7 +4,7 @@
 // Hopefully this is self explanatory of how to handle things.							   //
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-/proc/parse_spoilers(text) // Free to use. Added here because werewolfs are a bit more of a basic examine system. But I do want it so people can be expressive, even if its explicit or otherwise.
+/proc/parse_spoilers(text) // Free to use. Added here because werewolfs are a bit more of a basic examine system. But I *do* want it so people can be expressive, even if its explicit or otherwise.
     if(!text)
         return text
     var/regex/R = new(@"\|\|(.+?)\|\|", "g")
@@ -25,26 +25,27 @@
 		return FALSE
 	if(stat >= UNCONSCIOUS)
 		return FALSE
-	if(W.rename_used)
-		to_chat(src, span_warning("You have already chosen your wolf name. If you made a mistake, ahelp and ask an admin to set your werewolf datums 'rename_used' var to false!"))
+	if(W.allow_rename)
+		var/newname = input(src, "Choose your wolf name. Limit: [WEREWOLF_MAXNAMEL_LIMIT] characters.", "Wolf Name", W.wolfname) as text|null
+		if(!newname)
+			return FALSE
+		newname = sanitize_name(newname)
+		if(!length(newname))
+			return FALSE
+		if(length(newname) > WEREWOLF_MAXNAMEL_LIMIT)
+			to_chat(src, span_notice("Your wolf name is too long. We'll repeat it back here for you to modify: [newname]\nYour wolf name is too long. We'll repeat it back here for you to modify."))
+			return FALSE
+		W.wolfname = newname
+		src.werewolf_setname = newname
+		W.allow_rename = TRUE
+		if(istype(src, /mob/living/carbon/human/species/werewolf)) // If currently transformed, update the active mob
+			src.real_name = newname
+			src.name = newname
+		to_chat(src, span_notice("Your wolf name is now [newname]."))
+		return TRUE
+	else 
+		to_chat(src, span_warning("Not allowed to rename! Currently: [W.wolfname]  If there is a mistake, ahelp and ask an admin to set your character's mind > Werewolf antag datum > 'allow_rename' var back to TRUE or 1!"))
 		return FALSE
-	var/newname = input(src, "Choose your wolf name. Limit: [WEREWOLF_MAXNAMEL_LIMIT] characters.", "Wolf Name", W.wolfname) as text|null
-	if(!newname)
-		return FALSE
-	newname = sanitize_name(newname)
-	if(!length(newname))
-		return FALSE
-	if(length(newname) > WEREWOLF_MAXNAMEL_LIMIT)
-		to_chat(src, span_notice("Your wolf name is too long. We'll repeat it back here for you to modify: [newname]\nYour wolf name is too long. We'll repeat it back here for you to modify."))
-		return FALSE
-	W.wolfname = newname
-	W.rename_used = TRUE
-	if(istype(src, /mob/living/carbon/human/species/werewolf)) // If currently transformed, update the active mob
-		src.real_name = newname
-		src.name = newname
-	to_chat(src, span_notice("Your wolf name is now [newname]."))
-
-	return TRUE
 
 /mob/living/carbon/human/proc/werewolf_changedesc()
 	set name = "Change Wolf Description"
@@ -57,7 +58,7 @@
 		return FALSE
 	if(stat >= UNCONSCIOUS)
 		return FALSE
-	var/inputteddesc = input(src, "Choose your wolf description. Limit: [WEREWOLF_MAXDESCL_LIMIT] characters.", "Wolf Description", W.wolfdesc_raw) as message|null
+	var/inputteddesc = input(src, "Choose your wolf description. Limit: [WEREWOLF_MAXDESCL_LIMIT] characters.", "Wolf Description", W.wolfdesc) as message|null
 	if(!inputteddesc)
 		return FALSE
 	inputteddesc = trim(inputteddesc)
@@ -66,12 +67,10 @@
 	if(length(inputteddesc) > WEREWOLF_MAXDESCL_LIMIT)
 		to_chat(src, span_notice("Your wolf description is too long."))
 		return FALSE
-	// Save raw first
-	W.wolfdesc_raw = inputteddesc
-	// Now generate rendered version
+	W.wolfdesc = inputteddesc
 	var/rendered = html_encode(inputteddesc)
 	rendered = parse_spoilers(rendered)
 	rendered = parsemarkdown_basic(rendered, limited = TRUE, barebones = TRUE)
-	W.wolfdesc = rendered
+	W.wolfdesc_cached = rendered
 	to_chat(src, span_notice("Your new wolf description is set."))
 	return TRUE

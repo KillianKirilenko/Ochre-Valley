@@ -49,9 +49,9 @@
 	var/ignore_transformation_resist = FALSE // Caustic Edit
 	var/wolfname = "Verewolf"
 // OV EDIT START
-	var/rename_used = FALSE
+	var/allow_rename = FALSE
 	var/wolfdesc
-	var/wolfdesc_raw // Used in recalling raw description info someone placed before it gets modified.
+	var/wolfdesc_cached
 	var/list/werewolf_verbs = list(
 		/mob/living/carbon/human/proc/werewolf_changename,
 		/mob/living/carbon/human/proc/werewolf_changedesc
@@ -103,10 +103,22 @@
 	if(increase_votepwr)
 		forge_werewolf_objectives()
 	// OV Edit Start
-	var/mob/M = owner?.current
-	apply_verbs(M)
+	var/mob/living/carbon/human/H = owner?.current
+	if(H)
+		if(H.werewolf_setname && length(H.werewolf_setname) > 0)
+			wolfname = H.werewolf_setname
+			allow_rename = FALSE
+		else
+			wolfname = "[pick(GLOB.wolf_prefixes)] [pick(GLOB.wolf_suffixes)]"
+			allow_rename = TRUE
+		if(H.werewolf_setdesc && H.werewolf_setdesc_cached)
+			wolfdesc = H.werewolf_setdesc
+			wolfdesc_cached = H.werewolf_setdesc_cached
+		apply_verbs(H)
+	else
+		wolfname = "[pick(GLOB.wolf_prefixes)] [pick(GLOB.wolf_suffixes)]"
+		allow_rename = TRUE
 	// OV Edit End
-	wolfname = "[pick(GLOB.wolf_prefixes)] [pick(GLOB.wolf_suffixes)]"
 	return ..()
 
 /datum/antagonist/werewolf/on_removal()
