@@ -948,9 +948,15 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	// Attempts to retrieve an item from a player's stash, and applies any base colors, where preferable.
 	if(user.mind && isliving(user))
 		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = input(user, "What will I take?", "STASH") as null|anything in user.mind.special_items
+			var/list/ourlist = user.mind.special_items.Copy()	//OV EDIT START - Allows players to retrieve items from vore scenes
+			if(SSinventory_return.sorted_inv[user.real_name])
+				ourlist += "Recover lost items"
+			var/item = input(user, "What will I take?", "STASH") as null|anything in ourlist	//OV EDIT END
 			if(item)
 				if(user.Adjacent(host_object))
+					if(item == "Recover lost items")	//OV ADD START
+						SSinventory_return.dispense(user,get_turf(user),host_object)
+						return	//OV ADD END
 					if(user.mind.special_items[item])
 						var/path2item = user.mind.special_items[item]
 						user.mind.special_items -= item

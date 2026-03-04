@@ -1031,6 +1031,7 @@
 
 	//Drop all items into the belly.
 	//if(CONFIG_GET(flag/items_survive_digestion))
+	SSinventory_return.digest_inventory_preserve(M)	//OV ADD - INVENTORY RETURN PORT FROM RS#1261
 	var/Itemlist = M.get_equipped_items(TRUE)
 	Itemlist += M.held_items
 	for(var/obj/item/W in Itemlist)
