@@ -38,7 +38,7 @@ SUBSYSTEM_DEF(inventory_return)
 		if(isliving(I.loc))
 			L = I.loc
 	if(isbelly(I.loc))
-		I.forceMove(get_turf(I.loc))
+		I.forceMove(get_turf(I.loc))	//We move this to the ground first to make sure it doesn't tell the pred that an item that is about to disappear entered their belly
 	else if(L)
 		L.dropItemToGround(I,force = TRUE)	//Unequip it just to be sure
 	mob_check(I)	//Check to make sure there's no mobs hidden inside of it, we're about to send it to nullspace, so we want to make extra super sure
