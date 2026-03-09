@@ -23,7 +23,7 @@ export const ViewCharacter = (props: {
         <Box>{overlay.species}</Box>
       </Section>
       <Section title="Vore Tag">
-        <Box p={1} backgroundColor={getTagColor(overlay.tag)}>
+        <Box p={1} backgroundColor={getTagColor(overlay.tag)} textColor={"black"}>
           {overlay.tag}
         </Box>
       </Section>
