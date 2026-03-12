@@ -1,3 +1,4 @@
+// OV FILE
 import { useBackend } from 'tgui/backend';
 import { Button, Section } from 'tgui-core/components';
 
@@ -6,74 +7,44 @@ export const ControlSmites = (props) => {
 
   return (
     <Section title="Smites">
-      <Button fluid onClick={() => act('break_legs')}>
-        Break Legs
+      <Button fluid onClick={() => act('lightning_strike')}>
+        Lightning Strike
       </Button>
       <Button fluid onClick={() => act('bluespace_artillery')}>
         Bluespace Artillery
       </Button>
-      <Button fluid onClick={() => act('spont_combustion')}>
-        Spontaneous Combustion
+      <Button fluid onClick={() => act('brain_damage')}>
+        Give Brain Damage
       </Button>
-      <Button fluid onClick={() => act('lightning_strike')}>
-        Lightning Bolt
+      <Button fluid onClick={() => act('Zesus_Psyst')}>
+        Zesus Psyst
       </Button>
-      <Button fluid onClick={() => act('shadekin_attack')}>
-        Shadekin Attack
+      <Button fluid onClick={() => act('CBT')}>
+        CBT
       </Button>
-      <Button fluid onClick={() => act('shadekin_vore')}>
-        Shadekin Vore
+      <Button fluid onClick={() => act('snap_neck')}>
+        Snap Neck
       </Button>
-      <Button fluid onClick={() => act('redspace_abduct')}>
-        Redspace Abduction
+      <Button fluid onClick={() => act('fracture_arms_and_legs')}>
+        Break Arms and Legs
       </Button>
-      <Button fluid onClick={() => act('autosave')}>
-        Autosave
+      <Button fluid onClick={() => act('throw_mob')}>
+        Throw Mob
       </Button>
-      <Button fluid onClick={() => act('autosave2')}>
-        Autosave AOE
+      <Button fluid onClick={() => act('liam')}>
+        Trey Liam
       </Button>
-      <Button fluid onClick={() => act('adspam')}>
-        Ad Spam
-      </Button>
-      <Button fluid onClick={() => act('peppernade')}>
-        Peppernade
-      </Button>
-      <Button fluid onClick={() => act('spicerequest')}>
-        Spawn Spice
-      </Button>
-      <Button fluid onClick={() => act('terror')}>
-        Terrify
-      </Button>
-      <Button fluid onClick={() => act('terror_aoe')}>
-        Terrify AOE
+      <Button fluid onClick={() => act('divine_wrath')}>
+        Divine Wrath
       </Button>
       <Button fluid onClick={() => act('spin')}>
         Spin
       </Button>
-      <Button fluid onClick={() => act('squish')}>
-        Squish
-      </Button>
-      <Button fluid onClick={() => act('pie_splat')}>
-        Pie Splat
-      </Button>
-      <Button fluid onClick={() => act('spicy_air')}>
-        Spicy Air
-      </Button>
-      <Button fluid onClick={() => act('hot_dog')}>
-        Hot Dog
-      </Button>
-      <Button fluid onClick={() => act('mob_tf')}>
-        Mob Transformation
-      </Button>
-      <Button fluid onClick={() => act('item_tf')}>
-        Object Transformation
+      <Button fluid onClick={() => act('wet_floors')}>
+        Slippery Surroundings
       </Button>
       <Button fluid onClick={() => act('elder_smite')}>
         Elder Smite
-      </Button>
-      <Button fluid onClick={() => act('wet_floors')}>
-        Wet Surrounding Floor
       </Button>
     </Section>
   );

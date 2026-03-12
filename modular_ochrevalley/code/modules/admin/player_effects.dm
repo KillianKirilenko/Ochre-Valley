@@ -10,15 +10,16 @@
 	var/datum/eventkit/player_effects/spawner = new()
 	spawner.target = target
 	spawner.user = src.mob
-	spawner.tgui_interact(src.mob)
+	spawner.ui_interact(src.mob)
 
 /datum/eventkit/player_effects
 	var/mob/target //The target of the effects
+	var/mob/user
 
 /datum/eventkit/player_effects/New()
 	. = ..()
 
-/datum/eventkit/player_effects/ui_interact(mob/user, datum/ui/ui)
+/datum/eventkit/player_effects/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "PlayerEffects", "Player Effects")
@@ -39,13 +40,13 @@
 	return data
 
 /datum/eventkit/player_effects/ui_state(mob/user)
-	return ADMIN_STATE(R_ADMIN|R_EVENT|R_DEBUG)
+	return GLOB.tgui_always_state
 
-/datum/eventkit/player_effects/ui_act(action, list/params, datum/ui/ui)
+/datum/eventkit/player_effects/ui_act(action, list/params, datum/tgui/ui)
 	. = ..()
 	if(.)
 		return
-	if(!check_rights_for(ui.user.client, R_SPAWN))
+	if(!ui.user.client.holder)
 		return
 
 	log_and_message_admins("used player effect: [action] on [target.ckey] playing [target.name]", ui.user)
@@ -54,17 +55,26 @@
 
 		////////////SMITES/////////////
 		if("lightning_strike")
+			var/mob/living/carbon/human/Tar = target
+			if(!istype(Tar))
+				return
 			var/turf/T = get_step(get_step(target, NORTH), NORTH)
-			T.Beam(target, icon_state="lightning[rand(1,12)]", time = 5)
-			target.adjustFireLoss(75)
+			T.Beam(Tar, icon_state="lightning[rand(1,12)]", time = 5)
+			Tar.adjustFireLoss(75)
 			if(ishuman(target))
-				var/mob/living/carbon/human/H = target
+				var/mob/living/carbon/human/H = Tar
 				H.electrocution_animation(40)
 			record_round_statistic(STATS_PEOPLE_SMITTEN)
-			to_chat(target, span_danger("The gods have punished you for your sins!"))
+			to_chat(Tar, span_danger("The gods have punished you for your sins!"))
 		if("brain_damage")
-			target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 199, 199)
+			var/mob/living/carbon/human/Tar = target
+			if(!istype(Tar))
+				return
+			Tar.adjustOrganLoss(ORGAN_SLOT_BRAIN, 199, 199)
 		if("Zesus_Psyst")
+			var/mob/living/carbon/human/Tar = target
+			if(!istype(Tar))
+				return
 			sleep(60)
 			target.psydo_nyte()
 			target.playsound_local(target, 'sound/misc/psydong.ogg', 100, FALSE)
@@ -76,10 +86,11 @@
 			target.playsound_local(target, 'sound/misc/psydong.ogg', 100, FALSE)
 			sleep(10)
 			target.gib(FALSE)
-		if("gib")
-			target.gib(FALSE)	
 		if("bluespace_artillery")
-			bluespace_artillery(target)
+			var/mob/living/carbon/human/Tar = target
+			if(!istype(Tar))
+				return
+			ui.user.client.bluespace_artillery(Tar)
 		if("CBT")
 			if(!ishuman(target))
 				to_chat(usr,span_warning("Target must be human!"))
@@ -160,7 +171,7 @@
 			if(!ishuman(target))
 				to_chat(usr,span_warning("Target must be human!"))
 				return
-			divine_wrath(target)
+			ui.user.client.divine_wrath(target)
 		if("spin")
 			var/speed = tgui_input_number(ui.user, "Spin speed (minimum 0.1):", "Speed")
 			if(speed < 0.1)
@@ -495,13 +506,11 @@
 			if(!chemical)
 				return
 
-			var/chem = chemical.id
-
 			var/amount = tgui_input_number(ui.user, "How much of the chemical would you like to add?", "Amount", 5)
 			if(!amount)
 				return
 			
-			Tar.reagents.add_reagent(chem, amount)
+			Tar.reagents.add_reagent(chemical, amount)
 
 		if("full_heal")
 			var/mob/living/carbon/Tar = target
@@ -813,7 +822,7 @@
 				return
 
 			for(var/obj/item/W in Tar)
-				Tar.drop_from_inventory(W)
+				Tar.dropItemToGround(W)
 
 		if("drop_specific")
 			var/mob/living/carbon/human/Tar = target
@@ -823,14 +832,13 @@
 			var/list/items = Tar.get_equipped_items()
 			var/item_to_drop = tgui_input_list(ui.user, "Choose item to force drop:", "Drop Specific Item", items)
 			if(item_to_drop)
-				Tar.drop_from_inventory(item_to_drop)
+				Tar.dropItemToGround(item_to_drop)
 
 		if("drop_held")
 			var/mob/living/carbon/human/Tar = target
 			if(!istype(Tar))
 				return
-			Tar.drop_l_hand()
-			Tar.drop_r_hand()
+			Tar.drop_all_held_items()
 
 		if("list_all")
 			var/mob/living/carbon/human/Tar = target
@@ -842,8 +850,6 @@
 			var/mob/living/carbon/human/Tar = target
 			if(!istype(Tar))
 				return
-			if(!check_rights_for(ui.user.client, R_HOLDER))
-				return
 			var/obj/item/X = ui.user.client.holder.marked_datum
 			if(!istype(X))
 				return
@@ -853,15 +859,11 @@
 			var/mob/living/carbon/human/Tar = target
 			if(!istype(Tar))
 				return
-			if(!check_rights_for(ui.user.client, R_HOLDER))
-				return
 			var/obj/item/X = ui.user.client.holder.marked_datum
 			if(!istype(X))
 				return
 			if(Tar.equip_to_appropriate_slot(X))
 				return
-			else
-				Tar.equip_to_storage(X)
 
 		////////ADMIN//////////////
 
@@ -873,30 +875,29 @@
 				ui.user.client.Getmob(target)
 			if(where == "To Mob")
 				var/mob/selection = tgui_input_list(ui.user, "Select a mob to jump [target] to:", "Jump to mob", GLOB.mob_list)
-				target.on_mob_jump()
 				target.forceMove(get_turf(selection))
 				log_admin("[key_name(ui.user)] jumped [target] to [selection]")
 			if(where == "To Area")
 				var/area/A
-				A = tgui_input_list(ui.user, "Pick an area to teleport [target] to:", "Jump to Area", return_sorted_areas())
-				target.on_mob_jump()
+				A = tgui_input_list(ui.user, "Pick an area to teleport [target] to:", "Jump to Area", GLOB.sortedAreas)
 				target.forceMove(pick(get_area_turfs(A)))
 				log_admin("[key_name(ui.user)] jumped [target] to [A]")
-			
-		if("paralyse")
-			var/mob/living/Tar = target
-			if(!istype(Tar))
-				return
-			ui.user.client.holder.paralyze_mob(Tar)
+		
+		if("gib")
+			var/death = tgui_alert(ui.user, "Are you sure you want to destroy [target]?", "Gib?", list("KILL", "Cancel"))
+			if(death == "KILL")
+				target.gib()
+		
+		if("dust")
+			var/death = tgui_alert(ui.user, "Are you sure you want to destroy [target]?", "Dust?", list("KILL", "Cancel"))
+			if(death == "KILL")
+				target.dust()
 
 		if("subtle_message")
 			ui.user.client.cmd_admin_subtle_message(target)
 
 		if("direct_narrate")
 			ui.user.client.cmd_admin_direct_narrate(target)
-
-		if("player_panel")
-			SSadmin_verbs.dynamic_invoke_verb(ui.user, /datum/admin_verb/show_player_panel, target)
 
 		if("view_variables")
 			ui.user.client.debug_variables(target)

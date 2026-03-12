@@ -1,3 +1,4 @@
+// OV FILE
 import { useBackend } from 'tgui/backend';
 import { Button, Section } from 'tgui-core/components';
 
@@ -9,44 +10,17 @@ export const ControlMedical = (props) => {
       <Button fluid onClick={() => act('health_scan')}>
         Health Analysis
       </Button>
-      <Button fluid onClick={() => act('appendicitis')}>
-        Appendicitis
-      </Button>
-      <Button fluid onClick={() => act('repair_organ')}>
-        Repair Organ
-      </Button>
-      <Button fluid onClick={() => act('damage_organ')}>
-        Damage Organ/Limb
-      </Button>
-      <Button fluid onClick={() => act('break_bone')}>
-        Break Bone
-      </Button>
-      <Button fluid onClick={() => act('drop_organ')}>
-        Drop Organ/Limb
-      </Button>
-      <Button fluid onClick={() => act('assist_organ')}>
-        Make Organ Assisted
-      </Button>
-      <Button fluid onClick={() => act('robot_organ')}>
-        Make Organ Robotic
-      </Button>
-      <Button fluid onClick={() => act('rejuvenate')}>
-        Rejuvenate
-      </Button>
-      <Button fluid onClick={() => act('stasis')}>
-        Toggle Stasis
-      </Button>
       <Button fluid onClick={() => act('give_chem')}>
         Give Reagent
       </Button>
       <Button fluid onClick={() => act('purge')}>
         Purge Reagents
       </Button>
-      <Button fluid onClick={() => act('medical_issue')}>
-        Create Custom Medical Issue
+      <Button fluid onClick={() => act('full_heal')}>
+        Full Heal
       </Button>
-      <Button fluid onClick={() => act('clear_issue')}>
-        Clear Custom Medical Issues
+      <Button fluid onClick={() => act('revive')}>
+        Revive
       </Button>
     </Section>
   );
