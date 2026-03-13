@@ -61,6 +61,7 @@
 				beltr = /obj/item/quiver/arrows
 			if("Naginata + Recurve Bow")
 				H.adjust_skillrank_up_to(/datum/skill/combat/bows, 4, TRUE)
+				backr = /obj/item/rogueweapon/scabbard/gwstrap //OV Add: Added so can holster naginata
 				r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve //OV Edit: Adjusted for spawn
 				l_hand = /obj/item/rogueweapon/spear/naginata //OV Edit: Adjusted for spawn
 				beltr = /obj/item/quiver/arrows
