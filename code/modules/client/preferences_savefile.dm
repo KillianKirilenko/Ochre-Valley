@@ -638,6 +638,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["directory_erptag"] >> directory_erptag
 	S["directory_gendertag"] >> directory_gendertag
 	S["directory_sexualitytag"] >> directory_sexualitytag
+	S["directory_pvp"] >> directory_pvp
 	S["directory_ad"] >> directory_ad
 	//OV edit end
 
@@ -873,6 +874,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["directory_erptag"] , directory_erptag)
 	WRITE_FILE(S["directory_gendertag"] , directory_gendertag)
 	WRITE_FILE(S["directory_sexualitytag"] , directory_sexualitytag)
+	WRITE_FILE(S["directory_pvp"] , directory_pvp) //OV ADD
 	WRITE_FILE(S["directory_ad"] , directory_ad)
 	//OV edit end
 
