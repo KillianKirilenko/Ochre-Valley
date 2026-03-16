@@ -2,6 +2,6 @@
     armor = ARMOR_LOADOUT_CLOTHING
 
 /datum/loadout_item/artijacket
-    name = "Artificer Jacket"
+    name = "artificer jacket"
 	path = /obj/item/clothing/suit/roguetown/armor/leather/jacket/artijacket/loadout
     sort_category = "Miscellaneous"
