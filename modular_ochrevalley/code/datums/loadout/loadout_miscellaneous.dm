@@ -4,10 +4,10 @@
 
 //Item
 /datum/loadout_item/artijacket
-    name = "artificer jacket"
+    name = "Artificer Jacket"
     path = /obj/item/clothing/suit/roguetown/armor/leather/jacket/artijacket/loadout
     sort_category = "Miscellaneous"
-    
+
 /datum/loadout_item/artijacket
     name = "Tarnished Gold Half-Mask"
     path = /obj/item/clothing/mask/rogue/lordmask/tarnished
