@@ -6,5 +6,6 @@
 	var/directory_erptag = "Unset"
 	var/directory_gendertag = "Unset"
 	var/directory_sexualitytag = "Unset"
+	var/directory_pvp = "No PvP"
 	var/directory_ad
 
