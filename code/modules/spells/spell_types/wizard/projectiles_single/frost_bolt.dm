@@ -29,7 +29,7 @@
 	xp_gain = TRUE
 	miracle = FALSE
 
-// OV Edit
+// OV Edit Start
 /obj/effect/proc_holder/spell/invoked/projectile/frostbolt/cast(list/targets, mob/user = user)
 	var/mob/living/carbon/human/H = user
 	var/datum/intent/a_intent = H.a_intent
@@ -38,6 +38,7 @@
 	else
 		projectile_type = /obj/projectile/magic/frostbolt
 	. = ..()
+// OV Edit End
 
 /obj/projectile/magic/frostbolt
 	name = "Frost Dart"
