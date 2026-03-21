@@ -206,7 +206,6 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, world.file2list("strings/rt/hedgeknightaggro
 		dust(FALSE, FALSE, TRUE)
 	if(outfit_weapon)
 		if(iscarbon(outfit_weapon.loc))
-			var/mob/living/carbon/looter = outfit_weapon.loc
 			to_chat(loc, span_warning("[outfit_weapon]'s energies fade, as [src] breathes their last, and it crumbles to dust.."))
 		QDEL_NULL(outfit_weapon)
 
